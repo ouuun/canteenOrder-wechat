@@ -1,0 +1,1 @@
+"F:\微信web开发者工具\cli.bat" cloud functions deploy --e cloud1-2giyv5g6a8648404 --n quickstartFunctions --r --project "F:\Projects\微信小程序\canteenOrder" --report_start --report

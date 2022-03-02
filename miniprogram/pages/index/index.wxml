@@ -1,32 +1,52 @@
-<!--index.wxml-->
-<view class="container">
-
-  <view class="title">快速了解云开发</view>
-
-  <view class="top_tip">免鉴权接口调用 免部署后台 高并发</view>
-
-  <view class="power" wx:key="title" wx:for="{{powerList}}" wx:for-item="power">
-    <view class="power_info" data-index="{{index}}" bindtap="onClickPowerInfo">
-      <view class="power_info_text">
-        <view class="power_info_text_title">{{power.title}}</view>
-        <view class="power_info_text_tip">{{power.tip}}</view>
-      </view>
-      <image wx:if="{{!power.showItem}}" class="power_info_more" src="../../images/arrow.svg"></image>
-      <image wx:if="{{power.showItem}}" class="power_info_less" src="../../images/arrow.svg"></image>
-    </view>
-    <view wx:if="{{power.showItem}}">
-      <view wx:key="title" wx:for="{{power.item}}">
-        <view class="line"></view>
-        <view class="power_item" bindtap="jumpPage" data-page="{{item.page}}">
-          <view class="power_item_title">{{item.title}}</view>
-          <image class="power_item_icon" src="../../images/arrow.svg"></image>
+<!-- 头图 -->
+<view class="head" bindtap="login">
+  <image src="../../images/index/user.png"></image>
+  <view class="name">2222</view>
+</view>
+<!-- 设置 -->
+<view class="set">
+  <image src="../../images/index/setting.png"/>
+</view>
+<!-- 功能选择区 -->
+<view class="functions">
+  <view class="title">常用功能</view>
+  <view class="modules">
+    <view class="module">
+      <view class="types">
+        <view class="type">
+          <image src="../../images/index/dish.png"></image>
+          <view class="name">菜品管理</view>
+        </view>
+        <view class="type">
+          <image src="../../images/index/order.png"></image>
+          <view class="name">我的订单</view>
+        </view>
+        <view class="type">
+          <image src="../../images/index/code.png"></image>
+          <view class="name">生成二维码</view>
+        </view>
+        <view class="type">
+          <image src="../../images/index/table.png"></image>
+          <view class="name">报表统计</view>
         </view>
       </view>
     </view>
   </view>
-
-  <view class="environment" bindtap="onChangeShowEnvChoose">当前环境 {{ selectedEnv.alias }}</view>
-
-  <cloud-tip-modal showUploadTipProps="{{showUploadTip}}"></cloud-tip-modal>
-
+</view>
+<!-- 每日数据 -->
+<view class="data">
+  <view class="item">
+    <view class="num">0</view>
+    <view class="name">订单</view>
+  </view>
+  <view class="item-split"></view>
+  <view class="item">
+    <view class="num">0</view>
+    <view class="name">收入</view>
+  </view>
+  <view class="item-split"></view>
+  <view class="item">
+    <view class="num">0</view>
+    <view class="name">菜品</view>
+  </view>
 </view>

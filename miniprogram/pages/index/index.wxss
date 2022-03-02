@@ -46,7 +46,7 @@ view.head{
 .functions>.title{
     font-size: 1.2rem;
     color:#fff;
-    text-shadow: 0.02rem 0.02rem 0.1rem #000;
+    text-shadow: 0.08rem 0.08rem 0.01rem #000;
 }
 .functions .modules{
     margin-top: 0.5rem;
@@ -58,7 +58,7 @@ view.head{
     background: white;
     display: flex;
     flex-direction: column;
-    box-shadow: 0.2rem 0.2rem 0.2rem #888888;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
 }
 .modules .types{
     display: flex;
@@ -83,7 +83,7 @@ view.head{
 /* 每日数据 */
 .data{
     position: relative;
-    top: -5rem;
+    top: -4.5rem;
     padding: 0.6rem;
     height: 2rem;
     margin: 0 1rem;
@@ -92,9 +92,9 @@ view.head{
     border-radius: 0.5rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     height: 3rem;
-    box-shadow: 0.2rem 0.2rem 0.2rem #888888;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
 }
 .data .item-split{
     width: 0.01rem;
@@ -108,6 +108,7 @@ view.head{
     flex-direction: column;
     height: 3rem;
     align-items: center;
+    padding-top: 0.4rem;
 }
 .data .item .num{
     font-size: 1.2rem;

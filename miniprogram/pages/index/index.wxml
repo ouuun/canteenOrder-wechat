@@ -1,7 +1,8 @@
 <!-- 头图 -->
-<view class="head" bindtap="login">
-  <image src="../../images/index/user.png"></image>
-  <view class="name">2222</view>
+<view class="head">
+  <image src="{{headImage}}"></image>
+  <view wx:if="{{!isLogin}}" class="login" bindtap="login"><button>登录</button></view>
+  <view wx:if="{{isLogin}}" class="name">{{name}}</view>
 </view>
 <!-- 设置 -->
 <view class="set">

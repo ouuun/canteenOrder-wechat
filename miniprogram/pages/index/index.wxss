@@ -22,6 +22,18 @@ view.head{
     border-radius: 5.5rem;
     border: 0.01rem black solid;
 }
+.head>.name{
+    margin-top: 0.5rem;
+    line-height: 2.2rem;
+}
+.head>.login>button{
+    margin-top: 0.5rem;
+    width: 6rem;
+    height: 2.2rem;
+    font-size: 0.9rem;
+    background: #DCDCDC;
+    font-weight: 100;
+}
 /* 设置 */
 .set image{
     width: 1.8rem;

@@ -6,7 +6,7 @@
 </view>
 <!-- 设置 -->
 <view class="set">
-  <image src="../../images/index/setting.png"/>
+  <image src="../../images/index/setting.png" />
 </view>
 <!-- 功能选择区 -->
 <view class="functions">

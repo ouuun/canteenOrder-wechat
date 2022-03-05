@@ -1,5 +1,5 @@
-const config = require('../../config')
-const http = require('../../http/http')
+const { request } = require('../../util/http/request')
+
 Page({
   data: {
     isLogin: false,
@@ -8,9 +8,9 @@ Page({
     name: 'username',
     openid: ''
   },
-  onLoad: function () {
+  onLoad: async function () {
     if (wx.getStorageSync('token')) {
-      this.getUserInfoByToken();
+      await this.getUserInfoByToken();
       this.setData({
         isLogin: true,
         name: wx.getStorageSync('name'),
@@ -26,7 +26,7 @@ Page({
     wx.login({
       success(res) {
         if (res.code) {
-          http.request({
+          request({
             url: '/api/user/login',
             method: 'GET',
             data: {
@@ -66,7 +66,7 @@ Page({
           icon: 'success',
           duration: 2000
         });
-        http.request({
+        request({
           url: '/api/user/register',
           method: 'post',
           data: {
@@ -93,9 +93,9 @@ Page({
       }
     })
   },
-  getUserInfoByToken: function () {
+  getUserInfoByToken: async function () {
     if (wx.getStorageSync('token')) {
-      http.request({
+      request({
         url: '/api/user/info',
         method: 'get',
         token: true,

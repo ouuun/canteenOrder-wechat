@@ -17,6 +17,12 @@
                     "pathName": "pages/index/index",
                     "query": "",
                     "scene": null
+                },
+                {
+                    "name": "pages/cuisine/cuisine",
+                    "pathName": "pages/cuisine/cuisine",
+                    "query": "",
+                    "scene": null
                 }
             ]
         }

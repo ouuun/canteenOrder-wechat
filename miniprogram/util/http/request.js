@@ -1,8 +1,7 @@
-const config = require('../config')
+const config = require('../config/config')
 
 module.exports = {
     request: function ({ url, method, data = {}, token }) {
-        // console.log(url, method, data, token);
         wx.showLoading({
             title: '加载中',
             mask:true

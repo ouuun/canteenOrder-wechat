@@ -1,0 +1,19 @@
+<view class="container">
+  <movable-area class="area" style="height:{{AREA_HEIGHT}}px;">
+    <movable-view 
+      class="item" 
+      style="height:{{ITEM_HEIGHT}}px; z-index:{{index == moveId ? 2 : 1}}" 
+      wx:for="{{musics}}" 
+      wx:key="index" 
+      y="{{item.y}}" 
+      direction="all" 
+      bind:change="moving" 
+      bind:touchend='moved' 
+      data-moveid="{{index}}"
+    >
+      <view class="item-container">
+        {{item.name}} - {{index}}
+      </view>
+    </movable-view>
+  </movable-area>
+</view>

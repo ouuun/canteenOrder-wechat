@@ -1,0 +1,26 @@
+:host {
+    background: #f7f7f7;
+  }
+  
+  
+  .container {
+    width: 100vw;
+  }
+  
+  
+  .area {
+    width: 100%;
+    background: red;
+  }
+  
+  
+  .item {
+    width: 100%;
+    background: #ffffff;
+  }
+  
+  
+  .item-container {
+    margin: 30rpx;
+    background: burlywood;
+  }

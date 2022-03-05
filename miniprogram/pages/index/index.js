@@ -1,5 +1,6 @@
 const { request } = require('../../util/http/request')
-
+const { toAsync } = require('../../util/toAsync/toAsync')
+const awx = toAsync("login", "getUserProfile");
 Page({
   data: {
     isLogin: false,
@@ -18,96 +19,88 @@ Page({
       });
     }
   },
-  login: function (event) {
+  login: async function (event) {
     var that = this;
     wx.showLoading({
       title: '登录中',
     })
-    wx.login({
-      success(res) {
-        if (res.code) {
-          request({
-            url: '/api/user/login',
-            method: 'GET',
-            data: {
-              code: res.code
-            }
-          }).then((res) => {
-            wx.hideLoading();
-            if (res.data.info.openid) {
-              that.setData({
-                hasInfo: false,
-                openid: res.data.info.openid,
-              })
-              wx.showModal({
-                title: '提示',
-                content: '是否允许获取信息？',
-                success(res) {
-                  if (res.confirm) {
-                    that.getUserInfo();
-                  }
-                }
-              });
-            } else if (res.data.info.access_token) {
-              wx.setStorageSync('token', res.data.info.access_token);
-              that.getUserInfoByToken();
-            }
-          });
+    const { code } = await awx.login();
+    if (code) {
+      const res = await request({
+        url: '/api/user/login',
+        method: 'GET',
+        data: {
+          code: code
         }
-      }
-    });
-  },
-  getUserInfo: function () {
-    wx.getUserProfile({
-      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      success: (res) => {
-        wx.showToast({
-          title: '登录成功',
-          icon: 'success',
-          duration: 2000
-        });
-        request({
-          url: '/api/user/register',
-          method: 'post',
-          data: {
-            name: res.userInfo.nickName,
-            image: res.userInfo.avatarUrl,
-            openid: this.data.openid
+      });
+      wx.hideLoading();
+      const data = res.data.info
+      if (data.openid) {
+        that.setData({
+          hasInfo: false,
+          openid: data.openid,
+        })
+        wx.showModal({
+          title: '提示',
+          content: '是否允许获取信息？',
+          success(res) {
+            if (res.confirm) {
+              that.getUserInfo();
+            }
           }
-        }).then(res => {
-          this.setData({
-            headImage: res.data.info.image,
-            name: res.data.info.name,
-            isLogin: true,
-          });
-          wx.setStorageSync('name', this.data.name);
-          wx.setStorageSync('headImage', this.data.headImage);
         });
-      },
-      fail: (res) => {
-        wx.showToast({
-          title: '授权失败',
-          icon: 'error',
-          duration: 2000
-        });
+      } else if (data.access_token) {
+        wx.setStorageSync('token', data.access_token);
+        await that.getUserInfoByToken();
       }
-    })
+    }
+  },
+  getUserInfo: async function () {
+    try {
+      const { userInfo } = await awx.getUserProfile({ desc: '用于完善会员资料' });
+      wx.showToast({
+        title: '登录成功',
+        icon: 'success',
+        duration: 2000
+      });
+
+      const res = await request({
+        url: '/api/user/register',
+        method: 'post',
+        data: {
+          name: userInfo.nickName,
+          image: userInfo.avatarUrl,
+          openid: this.data.openid
+        }
+      });
+      this.setData({
+        headImage: res.data.info.image,
+        name: res.data.info.name,
+        isLogin: true,
+      });
+      wx.setStorageSync('name', this.data.name);
+      wx.setStorageSync('headImage', this.data.headImage);
+    } catch (error) {
+      wx.showToast({
+        title: '取消授权',
+        icon: 'error'
+      });
+    }
   },
   getUserInfoByToken: async function () {
     if (wx.getStorageSync('token')) {
-      request({
+      const { data } = await request({
         url: '/api/user/info',
         method: 'get',
         token: true,
-      }).then((res) => {
-        this.setData({
-          headImage: res.data.info.image,
-          name: res.data.info.name,
-          isLogin: true,
-        });
-        wx.setStorageSync('name', this.data.name);
-        wx.setStorageSync('headImage', this.data.headImage);
       });
+      this.setData({
+        headImage: data.info.image,
+        name: data.info.name,
+        isLogin: true,
+      });
+      wx.setStorageSync('name', this.data.name);
+      wx.setStorageSync('headImage', this.data.headImage);
     };
   }
 });

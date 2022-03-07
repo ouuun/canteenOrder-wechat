@@ -1,85 +1,58 @@
-const musics = [
-    {
-      name: '孤勇者',
-      singer: ['陈奕迅'],
-      difficulty: 3.5,
-    },
-    {
-      name: '不为谁而作的歌',
-      singer: ['林俊杰'],
-      difficulty: 4.5,
-    },
-    {
-      name: '幼稚完',
-      singer: ['林峰'],
-      difficulty: 2.5,
-    },
-    {
-      name: '那些你很冒险的梦',
-      singer: ['林俊杰'],
-      difficulty: 3.5,
-    },
-  ]
-  
-  
-  // 列表项高度
-  const ITEM_HEIGHT = 100
-  // 列表项上外边距
-  const ITEM_MARGIN_TOP = 20
-  // 列表高度
-  const AREA_HEIGHT = (ITEM_HEIGHT + ITEM_MARGIN_TOP) * musics.length
-  
-  
-  Component({
-    data: {
-      musics,
-      // 移动的是哪个元素块
-      moveId: null,
-      // 最终停止的位置
-      endY: 0,
-      ITEM_HEIGHT,
-      AREA_HEIGHT,
-    },
-  
-  
-    methods: {
-      onReady() {
-        const { musics } = this.data
-        this.init(musics)
-      },
-  
-  
-      // 重置列表顺序
-      init(musics) {
-        const list = musics.map((item, index) => {
-          item.id = index
-          // 单项顶部距离(组件默认是绝对定位且 left:0 & top:0 )
-          item.y = (ITEM_HEIGHT + ITEM_MARGIN_TOP) * index + ITEM_MARGIN_TOP
-          return item
+let app = getApp()
+app.unitgameinfo = { "members": [{ "member": { "nickname": "小程序照片合成", "job": "ckext" }, }, { "member": { "nickname": "高球丸子" }, }, { "member": { "nickname": "DRobertdsf", "job": "黄金" }, }, { "member": { "nickname": "erer", "job": "ckext" }, }, { "member": { "nickname": "just do it", "job": "黄金" }, }, { "member": { "nickname": "888" }, }], };
+Page({
+  data: {
+  },
+  onLoad: function (options) {
+    var info = app.unitgameinfo, list;
+    list = info.members;
+    this.setData({ options, info, list });
+    this.getwxmlcode("#movebox", (resp) => {
+      this.setData({ movebox: resp })
+      setTimeout(() => {
+        this.getwxmlcode("#movelist0", (res) => {
+          this.setData({ movelist0: res })
+          var jiange = res.top - resp.top;
+          var yiban = res.bottom - res.top + jiange;
+          this.setData({
+            itemheight: res.bottom - res.top,
+            jiange: yiban, //两条中间到另一条的距离
+            jianqu: resp.top - (res.bottom - res.top) / 2, //位置要减去距离
+          })
         })
-        console.log(list)
-        this.setData({ musics: list })
-      },
-  
-  
-      moved(e) {
-        const { musics, moveId, endY } = this.data
-        let list = musics
-        list[moveId].y = endY
-        list = list.sort((a, b) => a.y - b.y)
-        this.init(list)
-      },
-  
-  
-      moving(event) {
-        const {
-          detail,
-          currentTarget: { dataset },
-        } = event
-        this.setData({
-          moveId: dataset.moveid,
-          endY: detail.y,
-        })
-      }
-    },
-  })
+      }, 300)
+    })
+
+  },
+  getwxmlcode(str, cal) {
+    const query1 = wx.createSelectorQuery()
+    query1.select(str).boundingClientRect()
+    query1.selectViewport().scrollOffset()
+    query1.exec((res) => {
+      if (cal) cal(res[0])
+    })
+  },
+  listitemmove(e) {
+    // console.log(e)
+    if (e.type == "touchmove") {
+      var movetop = e.touches[0].pageY - this.data.itemheight;
+      var moveoutindex = parseInt((movetop - this.data.jianqu) / this.data.jiange);
+      if (e.currentTarget.dataset.index <= moveoutindex) moveoutindex++;
+      this.moveoutindex = moveoutindex;
+      this.setData({ nowmoveindex: e.currentTarget.dataset.index, movetop, moveoutindex })
+    } else {
+      let index = e.currentTarget.dataset.index, score = this.data.list;
+      let data = { ...score[index] };
+      score.splice(index, 1);
+      if (index <= this.moveoutindex - 1) this.moveoutindex--;
+      score.splice(this.moveoutindex, 0, data);
+      this.setData({ list: score, moveoutindex: -1, nowmoveindex: -1 });
+    }
+  },
+  onShow: function () {
+  },
+  lastsubmit() {
+    console.log(this.data.list)
+  },
+
+})

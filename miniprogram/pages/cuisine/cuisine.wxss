@@ -48,3 +48,13 @@ page {
   display: flex;
   align-items: center;
 }
+
+#movebox{
+  border:red 1px solid;
+}
+.changemovenow{
+  border:blue 1px solid;
+}
+#movelist0{
+  border:green 1px solid;
+}

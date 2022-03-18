@@ -1,15 +1,14 @@
-<view>
-  <view class="dileititle">手指移动选项排序</view>
-  <view style="width:740rpx;height:80vh;overflow-y:auto;margin:auto;" id="movebox">
-    <block wx:for="{{list}}" wx:key="index">
-      <view class="flex1 dileiitemlist" capture-bind:touchend="listitemmove" bindtouchmove="listitemmove" data-index="{{index}}"  id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;top:'+movetop+'px;height:'+itemheight+'px;'):''}}">
-        <view class="{{moveoutindex==index?'changemovenow':''}}" style="height:0;transition: height 0.5s;"></view>
-        <!-- <view class="ranknum">{{index+1}}</view> -->
-        <view class="flex1" style="border-radius:10rpx;width:440rpx;position:relative;color:#fff;">
-          <view bindtap="test" style="flex:1;text-align: center;margin-right: 20rpx;padding: 20rpx 20rpx;background:#8eb1f7;border-radius:10rpx;">{{item.member.nickname}}</view>
+<view id="movebox">
+  <block wx:for="{{typeList}}" wx:key="index">
+    <!-- <view class="flex1 typeItem" id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;top:'+movetop+'px;height:'+itemheight+'px;'):''}}"> -->
+      <view class="flex1 typeItem" id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;'):''}}">
+      <view class="{{moveoutindex==index?'occupied':''}}" style="height:0;transition: 0.25s;" />
+      <view class="flex1 item">
+        <view class="item_name">{{item.name}}</view>
+        <view capture-bind:touchend="move" bindtouchmove="move" data-index="{{index}}" style="position: absolute;right: 0.5rem;">
+          <image style="width:1.5rem;height:1.5rem;" src="../../images/cuisine/drag.png"></image>
         </view>
       </view>
-    </block>
-  </view>
+    </view>
+  </block>
 </view>
-<button class='tijiao' catchtap="lastsubmit">确定</button>

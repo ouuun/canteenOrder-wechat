@@ -1,0 +1,24 @@
+{
+  "name": "canteenorder",
+  "version": "1.0.0",
+  "description": "这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：",
+  "main": "index.js",
+  "dependencies": {
+    "@vant/weapp": "^1.10.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ouuun/canteenOrder-wechat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ouuun/canteenOrder-wechat/issues"
+  },
+  "homepage": "https://github.com/ouuun/canteenOrder-wechat#readme",
+  "keywords": []
+}

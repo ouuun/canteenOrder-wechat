@@ -48,11 +48,6 @@ page {
   justify-content: space-around;
 }
 
-.control view {
-  /* border: 1px black solid; */
-
-}
-
 .control>view>button {
   width: 10rem;
   height: 2.5rem;

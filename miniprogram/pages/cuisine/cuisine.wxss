@@ -3,6 +3,7 @@ page {
   background: rgba(116, 120, 122, 0.161);
 }
 
+/* 类型列表 */
 .movebox {
   display: flex;
   flex-direction: row;
@@ -31,11 +32,30 @@ page {
 .occupied {
   width: 100vh;
   height: 3rem !important;
-  /* border: blue 1px solid; */
   margin-bottom: 30rpx;
 }
 
 .flex1 {
   display: flex;
   align-items: center;
+}
+
+/* 控制区域 */
+.control {
+  margin-top: 1rem;
+  /* padding: 0 1rem; */
+  display: flex;
+  justify-content: space-around;
+}
+
+.control view {
+  /* border: 1px black solid; */
+
+}
+
+.control>view>button {
+  width: 10rem;
+  height: 2.5rem;
+  font-weight: 100;
+  border-radius: 0.5rem;
 }

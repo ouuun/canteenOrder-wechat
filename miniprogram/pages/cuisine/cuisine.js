@@ -3,10 +3,10 @@ Page({
   data: {
     typeList: [{ "name": "热销", "order": "1" }, { "name": "必点", "order": "2" }, { "name": "热销", "order": "1" }, { "name": "必点", "order": "2" }],
     isMove: false,
+    sort: false,
   },
   onLoad: function (options) {
     this.initDrag();
-
   },
   initDrag: function (params) {
     this.getwxmlcode("#movebox", (resp) => {
@@ -63,13 +63,13 @@ Page({
       };
     }
   },
-  onShow: function () {
-  },
-  lastsubmit() {
-    console.log(this.data.list)
-  },
-  test: function () {
-    console.log(123);
+  sort: function () {
+    if (this.data.sort) {
+      console.log('保存')
+    }
+    this.setData({
+      sort: !this.data.sort,
+    })
   }
 
 })

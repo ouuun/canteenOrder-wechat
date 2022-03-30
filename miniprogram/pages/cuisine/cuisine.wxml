@@ -1,20 +1,54 @@
 <!-- 类型列表 -->
 <view id="movebox">
   <block wx:for="{{typeList}}" wx:key="index">
-    <!-- <view class="flex1 typeItem" id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;top:'+movetop+'px;height:'+itemheight+'px;'):''}}"> -->
     <view class="flex1 typeItem" id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;'):''}}">
       <view class="{{moveoutindex==index?'occupied':''}}" style="height:0;transition: 0.25s;" />
       <view class="flex1 item">
         <view class="item_name">{{item.name}}</view>
-        <view capture-bind:touchend="move" bindtouchmove="move" data-index="{{index}}" style="position: absolute;right: 0.5rem;">
-          <image hidden="{{!sort}}" style="width:1.5rem;height:1.5rem;" src="../../images/cuisine/drag.png"></image>
+        <view class="btn" capture-bind:touchend="move" bindtouchmove="move" data-index="{{index}}">
+          <image wx:if="{{sort}}" style="width:1.5rem;height:1.5rem;" src="../../images/cuisine/drag.png"></image>
+        </view>
+        <view class="btn" bindtap="edit" data-id="{{item.id}}" data-id="{{item.id}}" data-name="{{item.name}}">
+          <image wx:if="{{!sort}}" style="width:1.6rem;height:1.6rem;" src="../../images/cuisine/update.png"></image>
         </view>
       </view>
     </view>
   </block>
 </view>
 <!-- 控制区域 -->
-<view class="control">
-  <view class="add"><button type="primary">添加</button></view>
-  <view class="sort" bindtap="sort" wx:if="{{typeList}}"><button>{{!sort?'排序':'保存'}}</button></view>
+<view class="control" style="{{moveoutindex==typeList.length?'margin-top:5rem !important;':''}}">
+  <view class="add" bindtap="add"><button type="primary">添加</button></view>
+  <view class="sort" bindtap="sort" wx:if="{{typeList.length>0}}"><button>{{!sort?'排序':'保存'}}</button></view>
 </view>
+<!-- 弹窗 -->
+<!-- 新增 -->
+<van-popup show="{{ addShow }}" closeable round position="bottom" custom-style="height: 15rem" bind:close="onClose">
+  <view id="body">
+    <view class="title">新增类型</view>
+    <view class="input">
+      <van-cell-group>
+        <van-field model:value="{{ newType }}" center clearable="true" placeholder="请输入类型名" cursor-spacing="80" border="true" use-button-slot>
+        </van-field>
+      </van-cell-group>
+    </view>
+    <view bindtap="addType" class="submit">
+      <button type="primary">添加</button>
+    </view>
+  </view>
+</van-popup>
+<!-- 修改 -->
+<van-popup show="{{ editShow }}" closeable round position="bottom" custom-style="height: 15rem" bind:close="onClose">
+  <view id="body">
+    <view class="title">修改类型</view>
+    <view class="input">
+      <van-cell-group>
+        <van-field model:value="{{ editType }}" center clearable="true" placeholder="{{type}}" cursor-spacing="80" border="true" use-button-slot>
+        </van-field>
+      </van-cell-group>
+    </view>
+    <view class="submit">
+      <button bindtap="updateType" type="primary">修改</button>
+      <button bindtap="deleteType" type="warn">删除</button>
+    </view>
+  </view>
+</van-popup>

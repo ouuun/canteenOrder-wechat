@@ -32,6 +32,7 @@ page {
 .occupied {
   width: 100vh;
   height: 3rem !important;
+  /* border: 1px solid black; */
   margin-bottom: 30rpx;
 }
 
@@ -40,6 +41,11 @@ page {
   align-items: center;
 }
 
+.btn {
+  position: absolute;
+  right: 20rpx;
+  top: 23rpx;
+}
 /* 控制区域 */
 .control {
   margin-top: 1rem;
@@ -50,7 +56,32 @@ page {
 
 .control>view>button {
   width: 10rem;
-  height: 2.5rem;
-  font-weight: 100;
+  font-weight: 300;
   border-radius: 0.5rem;
+}
+/* 新增类型弹窗 */
+#body{
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+#body>view{
+ margin-top: 1.25rem;
+}
+
+.input{
+  border: solid 1px black;
+}
+.submit{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content:space-between;
+}
+.submit button{
+  margin: 0;
+  width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
+  font-size: 1rem;
+  font-weight: 100;
 }

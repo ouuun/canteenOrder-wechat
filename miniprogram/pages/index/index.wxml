@@ -14,7 +14,7 @@
   <view class="modules">
     <view class="module">
       <view class="types">
-        <view class="type">
+        <view bindtap="openCuisine" class="type">
           <image src="../../images/index/dish.png"></image>
           <view class="name">菜品管理</view>
         </view>

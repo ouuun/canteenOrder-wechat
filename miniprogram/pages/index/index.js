@@ -108,4 +108,7 @@ Page({
       tmplIds: ['Jh3c8z8H_SBimPbWdhuZYX3biCMvojLBLjXpCsz0jbw']
     });
   },
+  openCuisine:function() {
+    wx.navigateTo({url:"../cuisine/cuisine"});
+  }
 });

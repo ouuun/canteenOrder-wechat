@@ -19,10 +19,18 @@
                     "scene": null
                 },
                 {
-                    "name": "pages/cuisine/cuisine",
-                    "pathName": "pages/cuisine/cuisine",
+                    "name": "",
+                    "pathName": "pages/cuisine/type/type",
                     "query": "",
+                    "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/cuisine/dish/dish",
+                    "query": "",
+                    "scene": null,
+                    "launchMode": "default"
                 }
             ]
         }

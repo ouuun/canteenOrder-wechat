@@ -1,0 +1,22 @@
+<view class="item">
+    <view class="attr">头图</view>
+    <view class="imgs">
+        <block wx:key="index" wx:for="{{imgList}}">
+            <view class="img">
+                <view class="delete" bindtap="delete" data-index="{{index}}">
+                    <image src="../../../images/cuisine/delete.png" />
+                </view>
+                <image data-index="{{index}}" bindtap="look" src="{{item.url}}" />
+            </view>
+        </block>
+        <view bindtap="chooseImg" class="input img">
+            <image style="width: 49rpx;height: 49rpx;" src="../../../images/cuisine/photo.png" />
+        </view>
+    </view>
+</view>
+
+<van-cell-group>
+    <view class="van-item">
+        <van-field model:value="{{ username }}" clearable label="用户名" placeholder="请输入用户名" clearable label-class="attr" input-class="van-input" />
+    </view>
+</van-cell-group>

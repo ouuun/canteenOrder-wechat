@@ -1,7 +1,8 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/cuisine/cuisine"
+        "pages/cuisine/type/type",
+        "pages/cuisine/dish/dish"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -14,6 +15,7 @@
     "usingComponents": {
         "van-button": "@vant/weapp/button/index",
         "van-popup": "@vant/weapp/popup/index",
-        "van-field": "@vant/weapp/field/index"
+        "van-field": "@vant/weapp/field/index",
+        "van-uploader": "@vant/weapp/uploader/index"
     }
 }

@@ -1,4 +1,4 @@
-const { request, needLogin } = require('../../util/http/request')
+const { request, needLogin } = require('../../../util/http/request')
 let app = getApp()
 Page({
   data: {

@@ -109,6 +109,6 @@ Page({
     });
   },
   openCuisine:function() {
-    wx.navigateTo({url:"../cuisine/cuisine"});
+    wx.navigateTo({url:"../cuisine/type/type"});
   }
 });

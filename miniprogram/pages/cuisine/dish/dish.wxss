@@ -1,0 +1,89 @@
+Page {
+    background: rgba(116, 120, 122, 0.161);
+}
+
+.item {
+    padding: 20rpx;
+    margin: 20rpx;
+    border-radius: 10rpx;
+    font-size: 36rpx;
+    background-color: white;
+}
+
+.item .attr {
+    width: 185rpx;
+    /* text-align: center; */
+    position: relative;
+    left: 10rpx;
+    float: left;
+    /* padding: 0 55rpx; */
+}
+
+/* .input {
+    flex-grow: 1;
+} */
+
+.van-item {
+    margin: 20rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+}
+
+.van-input {
+    font-size: 36rpx;
+}
+
+.attr.van-field__label {
+    font-size: 36rpx;
+    color: #000;
+    /* position: relative;
+    left: 28rpx; */
+}
+
+/* 图片 */
+.imgs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: space-around;
+}
+
+.img {
+    margin: 1rpx 6rpx;
+    position: relative;
+}
+
+.img image {
+    width: 150rpx;
+    height: 150rpx;
+    object-fit: cover;
+}
+
+.input.img {
+    background: #F5F5F5;
+    display: flex;
+    width: 150rpx;
+    height: 150rpx;
+    justify-content: center;
+    align-items: center;
+    border: 1rpx solid 	#A9A9A9;
+}
+.delete image{
+    height: 20rpx;
+    width: 20rpx;
+    /* position: relative;
+    left: 15rpx;
+    top:-7rpx; */
+}
+.delete {
+    position:absolute;
+    height: 40rpx;
+    width: 40rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+    right: 0;
+    background-color: rgba(63,69,71);
+    border-radius: 0 0 0 25rpx;
+}

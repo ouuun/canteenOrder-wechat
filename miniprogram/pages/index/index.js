@@ -102,5 +102,10 @@ Page({
       wx.setStorageSync('name', this.data.name);
       wx.setStorageSync('headImage', this.data.headImage);
     };
-  }
+  },
+  subscribe:function(){
+    wx.requestSubscribeMessage({
+      tmplIds: ['Jh3c8z8H_SBimPbWdhuZYX3biCMvojLBLjXpCsz0jbw']
+    });
+  },
 });

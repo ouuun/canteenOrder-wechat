@@ -23,9 +23,11 @@ Page({
       url: '/api/manager/type/search',
       method: 'GET',
     });
-    this.setData({
-      typeList: res.data.list.sort((a, b) => { return a.sort - b.sort })
-    });
+    if (res.code == 200) {
+      this.setData({
+        typeList: res.data.list.sort((a, b) => { return a.sort - b.sort })
+      });
+    }
   },
   // 初始化拖动排序所需信息
   initDrag: function (params) {
@@ -164,5 +166,10 @@ Page({
       await this.getTypeList();
       this.onClose();
     }
+  },
+  // 下拉刷新
+  onPullDownRefresh: async function () {
+    await this.getTypeList();
+    wx.stopPullDownRefresh();
   }
 })

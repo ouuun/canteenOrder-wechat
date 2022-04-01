@@ -18,7 +18,7 @@
           <image src="../../images/index/dish.png"></image>
           <view class="name">菜品管理</view>
         </view>
-        <view class="type">
+        <view class="type" bindtap="subscribe">
           <image src="../../images/index/order.png"></image>
           <view class="name">我的订单</view>
         </view>

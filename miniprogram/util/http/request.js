@@ -33,10 +33,11 @@ module.exports = {
                     if (res.statusCode === 200 || res.data.code === 200) {
                         resolve(res.data);
                     } else {
-                        wx.showToast({
-                            title: res.data.message,
-                            icon: 'error'
-                        })
+                        wx.showModal({
+                            title: '提示',
+                            content: res.data.message,
+                        });
+                        resolve({ code: 0 });
                     }
                 },
                 fail(error) {  //返回失败也同样传入reject()方法

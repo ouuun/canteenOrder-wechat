@@ -12,19 +12,14 @@ Page {
 
 .item .attr {
     width: 185rpx;
-    /* text-align: center; */
     position: relative;
     left: 10rpx;
+    top: 10rpx;
     float: left;
-    /* padding: 0 55rpx; */
 }
 
-/* .input {
-    flex-grow: 1;
-} */
-
 .van-item {
-    margin: 20rpx;
+    margin: 15rpx 20rpx;
     border-radius: 10rpx;
     overflow: hidden;
 }
@@ -66,24 +61,113 @@ Page {
     height: 150rpx;
     justify-content: center;
     align-items: center;
-    border: 1rpx solid 	#A9A9A9;
+    border: 1rpx solid #A9A9A9;
 }
-.delete image{
+
+.delete image {
     height: 20rpx;
     width: 20rpx;
-    /* position: relative;
-    left: 15rpx;
-    top:-7rpx; */
 }
+
 .delete {
-    position:absolute;
+    position: absolute;
     height: 40rpx;
     width: 40rpx;
     display: flex;
     justify-content: center;
     align-items: center;
-    top:0;
+    top: 0;
     right: 0;
-    background-color: rgba(63,69,71);
+    background-color: rgba(63, 69, 71);
     border-radius: 0 0 0 25rpx;
+}
+
+/* 价格弹窗 */
+#body {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+#body>view {
+    margin-top: 1.25rem;
+}
+
+.input {
+    border: solid 1px black;
+}
+
+.submit {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.submit button {
+    margin: 0;
+    width: 5rem;
+    height: 2rem;
+    line-height: 2rem;
+    font-size: 1rem;
+    font-weight: 100;
+}
+
+/* 价格 */
+
+.item .value {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.item .price {
+    margin-bottom: 30rpx;
+}
+
+.item .submit button {
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 32rpx;
+    color: white;
+    font-weight: bolder;
+}
+
+.item .price .price-icon {
+    font-size: 32rpx;
+    position: relative;
+    left: 20rpx;
+}
+
+/* 份量 */
+.item.weight .attr {
+    left: 10rpx;
+    top: 5rpx;
+}
+
+.item.weight .value {
+    padding-left: 46%;
+}
+
+/* 类型 */
+.item.type .attr {
+    left: 30rpx;
+    top: 15rpx;
+}
+
+.item.type {
+    padding: 0;
+}
+
+.typePicker{
+    
+}
+
+/* 保存 */
+.save {
+    text-align: center;
+    margin: 20rpx;
+}
+
+.save button {
+    width: 100%;
 }

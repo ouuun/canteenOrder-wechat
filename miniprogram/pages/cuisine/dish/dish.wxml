@@ -1,22 +1,173 @@
-<view class="item">
-    <view class="attr">头图</view>
+<!-- 主图 -->
+<view class="item" style="margin-bottom: 10rpx;">
+    <view class="attr">主图</view>
     <view class="imgs">
-        <block wx:key="index" wx:for="{{imgList}}">
+        <block wx:key="index" wx:for="{{img}}">
             <view class="img">
-                <view class="delete" bindtap="delete" data-index="{{index}}">
+                <view class="delete" data-type="img" bindtap="delete" data-index="{{index}}">
                     <image src="../../../images/cuisine/delete.png" />
                 </view>
-                <image data-index="{{index}}" bindtap="look" src="{{item.url}}" />
+                <image data-index="{{index}}" data-type="img" bindtap="look" src="{{item.url}}" />
             </view>
         </block>
-        <view bindtap="chooseImg" class="input img">
-            <image style="width: 49rpx;height: 49rpx;" src="../../../images/cuisine/photo.png" />
+        <view wx:if="{{img.length<1}}" data-type="img" bindtap="chooseImg" class="input img">
+            <image style="width: 50rpx;height: 50rpx;" src="../../../images/cuisine/photo.png" />
         </view>
     </view>
 </view>
 
-<van-cell-group>
-    <view class="van-item">
-        <van-field model:value="{{ username }}" clearable label="用户名" placeholder="请输入用户名" clearable label-class="attr" input-class="van-input" />
+<!-- 详情图 -->
+<view class="item" style="margin-top: 0;">
+    <view class="attr">详情图</view>
+    <view class="imgs">
+        <block wx:key="index" wx:for="{{imgList}}">
+            <view class="img">
+                <view class="delete" bindtap="delete" data-type="imgList" data-index="{{index}}">
+                    <image src="../../../images/cuisine/delete.png" />
+                </view>
+                <image data-index="{{index}}" data-type="imgList" bindtap="look" src="{{item.url}}" />
+            </view>
+        </block>
+        <view wx:if="{{imgList.length<6}}" data-type="imgList" bindtap="chooseImg" class="input img">
+            <image style="width: 50rpx;height: 50rpx;" src="../../../images/cuisine/photo.png" />
+        </view>
     </view>
-</van-cell-group>
+</view>
+
+<view>
+    <van-cell-group>
+
+        <!-- 菜名 -->
+        <view class="van-item">
+            <van-field model:value="{{ name }}" clearable label="菜名" placeholder="请输入菜名" clearable label-class="attr" input-class="van-input" />
+        </view>
+
+        <!-- 类型 -->
+        <view class="item type">
+            <view class="attr">类型</view>
+            <view class="value">
+                <van-cell is-link value="{{type}}" data-type="typePicker" bindtap="show" />
+            </view>
+        </view>
+
+
+        <!-- 规格 -->
+        <view class="item">
+            <view class="attr">规格</view>
+            <view class="value">
+                <view class="price" wx:if="{{prices.length >0}}">
+                    <van-cell-group>
+                        <block wx:for="{{prices}}" wx:key="index">
+                            <van-cell title="{{item.name}}" value="{{item.price}}" data-index="{{index}}" data-type="priceEdit" bind:click="show">
+                                <van-icon slot="right-icon" name="setting-o" class="price-icon" />
+                            </van-cell>
+                        </block>
+                    </van-cell-group>
+                </view>
+                <view class="submit" data-type="priceAdd" bindtap="show">
+                    <van-button type="primary">增加</van-button>
+                </view>
+            </view>
+        </view>
+
+        <!-- 口味 -->
+        <view class="item">
+            <view class="attr">口味</view>
+            <view class="value">
+                <view class="price" wx:if="{{tastes.length >0}}">
+                    <van-cell-group>
+                        <block wx:for="{{tastes}}" wx:key="index">
+                            <van-cell title="{{item.name}}" value="{{item.price}}" data-index="{{index}}" data-type="tasteEdit" bind:click="show">
+                                <van-icon slot="right-icon" name="setting-o" class="price-icon" />
+                            </van-cell>
+                        </block>
+                    </van-cell-group>
+                </view>
+                <view class="submit" data-type="tasteAdd" bindtap="show">
+                    <van-button type="primary">增加</van-button>
+                </view>
+            </view>
+        </view>
+
+        <!-- 原料 -->
+        <view class="van-item">
+            <van-field model:value="{{ material }}" label="原料" type="textarea" placeholder="原料" autosize border="{{ false }}" label-class="attr" input-class="van-input" />
+        </view>
+
+        <!-- 烹饪方式 -->
+        <view class="van-item">
+            <van-field model:value="{{ cooking }}" label="烹饪方式" type="textarea" placeholder="烹饪方式" autosize border="{{ false }}" label-class="attr" input-class="van-input" />
+        </view>
+
+        <!-- 份量 -->
+        <view class="item weight">
+            <view class="attr">份量</view>
+            <view class="value">
+                <van-stepper model:value="{{ weight }}" integer bind:change="weight"/>
+            </view>
+        </view>
+    </van-cell-group>
+</view>
+
+
+<!-- 保存 -->
+<view class="save" bindtap="save">
+    <van-button type="primary">保存</van-button>
+</view>
+
+<!-- 规格弹窗 -->
+<van-popup show="{{ pricesShow }}" closeable round position="bottom" custom-style="height: 20rem" bind:close="onClose">
+    <view id="body">
+        <view class="title">{{edit?"编辑":"新增"}}规格</view>
+        <view class="input">
+            <van-cell-group>
+                <van-field model:value="{{ priceName }}" center clearable="true" placeholder="请输入规格" cursor-spacing="140" border="true" use-button-slot>
+                </van-field>
+            </van-cell-group>
+        </view>
+        <view class="input">
+            <van-cell-group>
+                <van-field type="digit" model:value="{{ priceValue }}" center clearable="true" placeholder="请输入价格" cursor-spacing="80" border="true" use-button-slot>
+                </van-field>
+            </van-cell-group>
+        </view>
+        <view wx:if="{{!edit}}" bindtap="addPrice" class="submit">
+            <button type="primary">添加</button>
+        </view>
+        <view wx:if="{{edit}}" class="submit">
+            <button bindtap="updatePrice" type="primary">修改</button>
+            <button bindtap="deletePrice" type="warn">删除</button>
+        </view>
+    </view>
+</van-popup>
+
+<!-- 口味弹窗 -->
+<van-popup show="{{ tasteShow }}" closeable round position="bottom" custom-style="height: 20rem" bind:close="onClose">
+    <view id="body">
+        <view class="title">{{edit?"编辑":"新增"}}口味</view>
+        <view class="input">
+            <van-cell-group>
+                <van-field model:value="{{ tasteName }}" center clearable="true" placeholder="请输入口味" cursor-spacing="140" border="true" use-button-slot>
+                </van-field>
+            </van-cell-group>
+        </view>
+        <view class="input">
+            <van-cell-group>
+                <van-field type="digit" model:value="{{ tasteValue }}" center clearable="true" placeholder="请输入价格" cursor-spacing="80" border="true" use-button-slot>
+                </van-field>
+            </van-cell-group>
+        </view>
+        <view wx:if="{{!edit}}" bindtap="addTaste" class="submit">
+            <button type="primary">添加</button>
+        </view>
+        <view wx:if="{{edit}}" class="submit">
+            <button bindtap="updateTaste" type="primary">修改</button>
+            <button bindtap="deleteTaste" type="warn">删除</button>
+        </view>
+    </view>
+</van-popup>
+
+<!-- 类型弹窗 -->
+<van-popup lock-scroll show="{{ typeShow }}" round position="bottom" custom-style="height: 580rpx" bind:close="onClose">
+    <van-picker custom-class="typePicker" show-toolbar title="类型" columns="{{ types }}" bind:cancel="onCancel" bind:confirm="onConfirm" />
+</van-popup>

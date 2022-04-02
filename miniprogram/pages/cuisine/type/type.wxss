@@ -69,7 +69,7 @@ page {
  margin-top: 1.25rem;
 }
 
-.input{
+#body>.input{
   border: solid 1px black;
 }
 .submit{

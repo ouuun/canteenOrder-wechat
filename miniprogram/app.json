@@ -2,7 +2,8 @@
     "pages": [
         "pages/index/index",
         "pages/cuisine/type/type",
-        "pages/cuisine/dish/dish"
+        "pages/cuisine/dish/dish",
+        "pages/cuisine/show/show"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

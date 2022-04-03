@@ -40,9 +40,9 @@ Page({
 
     onLoad: async function (options) {
         await this.getTypes();
-        if (options.type != null) {
+        if (options.typeId != null) {
             const typelist = this.data.typeList;
-            const type = typelist.find((i) => i.id == Number(options.type));
+            const type = typelist.find((i) => i.id == Number(options.typeId));
             this.setData({
                 type: type.name
             })

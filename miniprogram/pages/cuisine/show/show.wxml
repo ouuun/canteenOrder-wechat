@@ -1,0 +1,32 @@
+<!--pages/cuisine/show/show.wxml-->
+<view class="dishes">
+    <block wx:for="{{dishes}}" wx:key="index">
+        <view class="dish">
+            <!-- 图片 -->
+            <view class="left">
+                <view class="img" data-id="{{item.id}}" bindtap=watchImgs">
+                    <image src="{{item.mainImages}}"></image>
+                </view>
+            </view>
+            <!-- 信息 -->
+            <view class="middle">
+                <view class="name">{{item.name}}</view>
+                <view class="sale">已售：{{item.sale || 0}}</view>
+                <view class="material">食材：{{item.material}}</view>
+                <view class="cooking">烹饪方式：{{item.cooking}}</view>
+                <view class="price">
+                    <span class="icon">￥</span>{{item.prices[0].price}}
+                </view>
+            </view>
+            <!-- 按键 -->
+            <view class="right" data-id="{{item.id}}" bindtap="editDish">
+                <view>
+                    <van-button type="primary">编辑</van-button>
+                </view>
+            </view>
+        </view>
+    </block>
+</view>
+<view class="add" bindtap="addDish">
+    <van-button type="primary">添加</van-button>
+</view>

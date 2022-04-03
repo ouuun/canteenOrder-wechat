@@ -171,5 +171,9 @@ Page({
   onPullDownRefresh: async function () {
     await this.getTypeList();
     wx.stopPullDownRefresh();
+  },
+  getDishes:function(event){
+    const id = event.currentTarget.dataset.id;
+    wx.navigateTo({url:`../show/show?id=${id}`});
   }
 })

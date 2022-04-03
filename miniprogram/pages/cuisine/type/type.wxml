@@ -1,14 +1,14 @@
 <!-- 类型列表 -->
 <view id="movebox">
   <block wx:for="{{typeList}}" wx:key="index">
-    <view class="flex1 typeItem" id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;'):''}}">
+    <view data-id="{{item.id}}" bindtap="getDishes" class="flex1 typeItem" id="movelist{{index}}" style="left:0;right:0;{{nowmoveindex==index?('position:absolute;'):''}}">
       <view class="{{moveoutindex==index?'occupied':''}}" style="height:0;transition: 0.25s;" />
       <view class="flex1 item">
         <view class="item_name">{{item.name}}</view>
-        <view class="btn" capture-bind:touchend="move" bindtouchmove="move" data-index="{{index}}">
+        <view  class="btn" capture-bind:touchend="move" bindtouchmove="move" data-index="{{index}}">
           <image wx:if="{{sort}}" style="width:1.5rem;height:1.5rem;" src="../../../images/cuisine/drag.png"></image>
         </view>
-        <view class="btn" bindtap="edit" data-id="{{item.id}}" data-id="{{item.id}}" data-name="{{item.name}}">
+        <view class="btn" catchtap="edit" data-id="{{item.id}}" data-id="{{item.id}}" data-name="{{item.name}}">
           <image wx:if="{{!sort}}" style="width:1.6rem;height:1.6rem;" src="../../../images/cuisine/update.png"></image>
         </view>
       </view>

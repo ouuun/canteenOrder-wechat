@@ -29,6 +29,13 @@
                     "name": "",
                     "pathName": "pages/cuisine/dish/dish",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/cuisine/show/show",
+                    "query": "id=1",
                     "scene": null,
                     "launchMode": "default"
                 }

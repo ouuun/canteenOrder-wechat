@@ -1,0 +1,85 @@
+/* pages/cuisine/show/show.wxss */
+page {
+    background: rgba(116, 120, 122, 0.161);
+}
+
+/* 菜品列表 */
+.dishes {
+    display: flex;
+    flex-direction: column;
+    padding: 30rpx;
+}
+
+.dish {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 25rpx;
+    padding: 15rpx;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
+}
+/* 图片 */
+
+.dish .left image {
+    width: 225rpx;
+    height: 225rpx;
+    border-radius: 25rpx;
+    box-shadow: 0.15rem 0.15rem 0.5rem #888888;
+}
+/* 信息 */
+.dish .middle {
+    /* padding: 15rpx; */
+    margin-left: 65rpx;
+    display: flex;
+    flex-direction: column;
+    font-size: 40rpx;
+    flex-grow: 1;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.dish .middle .sale {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.dish .middle .material {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.dish .middle .cooking {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.dish .middle .price {
+    color: red;
+}
+
+.dish .middle .price .icon {
+    font-size: 26rpx;
+}
+/* 按钮 */
+.dish .right {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items:flex-end;
+}
+.dish .right button{
+    border-radius: 25rpx;
+    width: 150rpx;
+    height: 75rpx;
+    font-size: 32rpx;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
+}
+/* 添加 */
+.add{
+    padding:0 30rpx;
+}
+.add button{
+    font-size: 36rpx;
+    width: 100%;
+    border-radius: 25rpx;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
+}

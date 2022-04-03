@@ -19,8 +19,11 @@
                 </view>
             </view>
             <!-- 按键 -->
-            <view class="right" data-id="{{item.id}}" bindtap="editDish">
-                <view>
+            <view class="right" >
+                <view data-id="{{item.id}}" bindtap="editDishActive">
+                    <van-switch checked="{{ item.active }}" size="58rpx" />
+                </view>
+                <view data-id="{{item.id}}" bindtap="editDish">
                     <van-button type="primary">编辑</van-button>
                 </view>
             </view>

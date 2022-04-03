@@ -22,6 +22,7 @@
         "van-cell-group": "@vant/weapp/cell-group/index",
         "van-icon": "@vant/weapp/icon/index",
         "van-stepper": "@vant/weapp/stepper/index",
-        "van-picker": "@vant/weapp/picker/index"
+        "van-picker": "@vant/weapp/picker/index",
+        "van-switch": "@vant/weapp/switch/index"
     }
 }

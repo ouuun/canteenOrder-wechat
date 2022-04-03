@@ -18,6 +18,7 @@ page {
     padding: 15rpx;
     box-shadow: 0.1rem 0.15rem 0.15rem #888888;
 }
+
 /* 图片 */
 
 .dish .left image {
@@ -26,14 +27,17 @@ page {
     border-radius: 25rpx;
     box-shadow: 0.15rem 0.15rem 0.5rem #888888;
 }
+
 /* 信息 */
 .dish .middle {
     /* padding: 15rpx; */
-    margin-left: 65rpx;
+    margin:0  30rpx;
     display: flex;
     flex-direction: column;
     font-size: 40rpx;
     flex-grow: 1;
+    width: 250rpx;
+    overflow: hidden;
     align-items: flex-start;
     justify-content: space-between;
 }
@@ -46,11 +50,21 @@ page {
 .dish .middle .material {
     font-size: 26rpx;
     color: #999;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dish .middle .cooking {
     font-size: 26rpx;
     color: #999;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dish .middle .price {
@@ -60,24 +74,30 @@ page {
 .dish .middle .price .icon {
     font-size: 26rpx;
 }
+
 /* 按钮 */
 .dish .right {
     display: flex;
-    flex-direction: row-reverse;
-    align-items:flex-end;
+    /* flex-direction: row-reverse; */
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
 }
-.dish .right button{
+
+.dish .right button {
     border-radius: 25rpx;
-    width: 150rpx;
-    height: 75rpx;
+    width: 125rpx;
+    height: 60rpx;
     font-size: 32rpx;
     box-shadow: 0.1rem 0.15rem 0.15rem #888888;
 }
+
 /* 添加 */
-.add{
-    padding:0 30rpx;
+.add {
+    padding: 0 30rpx;
 }
-.add button{
+
+.add button {
     font-size: 36rpx;
     width: 100%;
     border-radius: 25rpx;

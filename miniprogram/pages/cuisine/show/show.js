@@ -24,6 +24,13 @@ Page({
             }
         });
         if (res.code == "200") {
+            const dishes = res.data.list;
+            dishes.forEach(dish => {
+                const priceSale = dish.prices.reduce((p, c) => {
+                    return p + c.sale;
+                }, 0);
+                dish.sale = priceSale;
+            });
             this.setData({
                 dishes: res.data.list,
                 typeId: typeId
@@ -45,5 +52,20 @@ Page({
     },
     addDish: function () {
         wx.navigateTo({ url: `../dish/dish?typeId=${this.data.typeId}` });
+    },
+    editDishActive: async function (event) {
+        const id = event.currentTarget.dataset.id;
+        const dish = this.data.dishes.find(i => i.id == id);
+
+        dish.active = !dish.active;
+        const res = await request({
+            url: "/api/manager/dish/update",
+            method: "POST",
+            data: dish,
+            token: true,
+        });
+        if (res.code == "200") {
+            wx.reLaunch({ url: `show?id=${this.data.typeId}` });
+        }
     }
 })

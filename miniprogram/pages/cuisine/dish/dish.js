@@ -1,8 +1,16 @@
 // pages/cuisine/dish.js
+const { request } = require('../../../util/http/request')
+const { toAsync } = require('../../../util/toAsync/toAsync')
+const config = require('../../../util/config/config')
+
+const awx = toAsync("uploadFile")
+
+
 const imgCountMap = {
     "img": { count: 1, file: "img" },
     "imgList": { count: 9, file: "imgList" }
 }
+
 Page({
 
     /**
@@ -15,7 +23,6 @@ Page({
         edit: false,//是否未编辑
         editId: 0,//当前编辑的数组下标
         pricesShow: false,//价格编辑弹窗
-        // prices: [{ id: 1, name: "小份", price: 1.5 }, { id: 1, name: "小份", price: 1.5 }],//价格数组
         prices: [],//价格数组
         priceName: '',
         priceValue: '',
@@ -27,11 +34,54 @@ Page({
         cooking: '',//烹饪方式
         weight: 1,//份量
         type: '类型',
+        typeList: [],
         types: ['1', '新款商品2', '新款商品3'],//类型
     },
 
-    onLoad: function (options) {
-
+    onLoad: async function (options) {
+        await this.getTypes();
+        if (options.type != null) {
+            const typelist = this.data.typeList;
+            const type = typelist.find((i) => i.id == Number(options.type));
+            this.setData({
+                type: type.name
+            })
+        }
+        if (options.id != null) {
+            const res = await request({
+                url: "/api/manager/dish/get",
+                data: {
+                    id: options.id
+                }
+            })
+            if (res.code == "200") {
+                const dish = res.data.info;
+                const type = this.data.typeList.find((i) => i.id == Number(dish.type));
+                this.setData({
+                    id: dish.id,
+                    img: dish.mainImages,
+                    imgList: dish.detailImages,
+                    name: dish.name,
+                    type: type.name,
+                    prices: dish.prices,
+                    tastes: dish.tastes,
+                    material: dish.material,
+                    cooking: dish.cooking,
+                    weight: dish.weight
+                });
+            }
+        }
+    },
+    // 获取类型
+    getTypes: async function () {
+        const res = await request({
+            url: "/api/manager/type/search",
+            method: "GET",
+        });
+        this.setData({
+            types: res.data.list.sort((a, b) => { return a.sort - b.sort }).map(i => i.name),
+            typeList: res.data.list
+        })
     },
     // 选择图片
     chooseImg: function (event) {
@@ -44,14 +94,15 @@ Page({
             success(res) {
                 // tempFilePath可以作为img标签的src属性显示图片
                 const tempFilePaths = res.tempFilePaths;
-                const imgNewList = tempFilePaths.map(i => { return { url: i } });
+                // const imgNewList = tempFilePaths.map(i => { return { url: i } });
+                // const imgNewList = tempFilePaths.map(i => { return { url: i } });
                 var old = [];
                 if (type === "img") {
                     old = that.data.img;
-                    that.setData({ img: old.concat(imgNewList) });
+                    that.setData({ img: old.concat(tempFilePaths) });
                 } else {
                     old = that.data.imgList;
-                    that.setData({ imgList: old.concat(imgNewList) });
+                    that.setData({ imgList: old.concat(tempFilePaths) });
                 }
             }
         })
@@ -65,7 +116,7 @@ Page({
         else imgs = this.data.imgList;
         wx.previewImage({
             current: imgs[index], // 当前显示图片的http链接
-            urls: imgs.map(i => i.url) // 需要预览的图片http链接列表
+            urls: imgs // 需要预览的图片http链接列表
         })
     },
     //点击删除图片
@@ -134,7 +185,6 @@ Page({
                 editId: index,
             });
         }
-
         if (type == "typePicker") {
             this.setData({ typeShow: true });
         }
@@ -145,7 +195,7 @@ Page({
         const price = this.data.priceValue;
         const prices = this.data.prices;
         this.setData({
-            prices: [...prices, { name: name, price: price }],
+            prices: [...prices, { name: name, price: price, sale: 0 }],
         });
         this.onClose();
     },
@@ -155,7 +205,7 @@ Page({
         const price = this.data.priceValue;
         const prices = this.data.prices;
         const index = this.data.editId;
-        const newPrice = { name: name, price: price };
+        const newPrice = { name: name, price: price, sale: prices[index].sale };
         prices[index] = newPrice;
         this.setData({
             prices: prices,
@@ -178,7 +228,7 @@ Page({
         const price = this.data.tasteValue;
         const tastes = this.data.tastes;
         this.setData({
-            tastes: [...tastes, { name: name, price: price }],
+            tastes: [...tastes, { name: name, price: price, sale: 0 }],
         });
         this.onClose();
     },
@@ -188,7 +238,7 @@ Page({
         const price = this.data.tasteValue;
         const tastes = this.data.tastes;
         const index = this.data.editId;
-        const newTaste = { name: name, price: price };
+        const newTaste = { name: name, price: price, sale: tastes[index].sale };
         tastes[index] = newTaste;
         this.setData({
             tastes: tastes,
@@ -207,30 +257,90 @@ Page({
     },
     // 保存
     save: async function () {
-        const { img, imgList, name, type, prices, tastes, material, cooking, weight } = this.data;
+        const { img, imgList, name, type, prices, tastes, material, cooking, weight, typeList } = this.data;
+        var error = "";
+        if (img.length == 0) error = "主图至少需要一张图片";
+        if (imgList.length == 0) error = "详情图至少需要一张图片";
+        if (name == "") error = "请输入菜品名";
+        if (type == 0) error = "请选择类型";
+        if (prices.length == 0) error = "至少需要一种规格";
+        if (material == "") error = "请输入原材料";
+        if (cooking == "") error = "请输入烹饪方式";
+
+        if (error !== "") {
+            wx.showModal({
+                title: '提示',
+                content: error
+            })
+            return null;
+        }
+
+        const imgRes = await this.uploadImgs(img);
+        const imgListRes = await this.uploadImgs(imgList);
 
         var dish = {
-            mainImages: img,
-            detailImages: imgList,
+            mainImages: imgRes,
+            detailImages: imgListRes,
             name: name,
-            type: type,
+            type: typeList.find(i => i.name == type).id,
             prices: prices,
             tastes: tastes,
             material: material,
             cooking: cooking,
             weight: weight
         };
-        this.setData({
-            mainImages: [],
-            detailImages: [],
-            name: '',
-            type: '类型',
-            prices: [],
-            tastes: [],
-            material: '',
-            cooking: '',
-            weight: 1
+
+        var isAdd = true;
+        if (this.data.id !== 0) {
+            dish.id = this.data.id;
+            isAdd = false;
+        }
+
+        const res = await request({
+            url: `/api/manager/dish/${isAdd ? "add" : "update"}`,
+            method: "POST",
+            data: dish,
+            token: true
         });
+
+        if (res.code == "200") {
+            if (isAdd)
+                this.setData({
+                    img: [],
+                    imgList: [],
+                    name: '',
+                    type: '类型',
+                    prices: [],
+                    tastes: [],
+                    material: '',
+                    cooking: '',
+                    weight: 1
+                });
+            else {
+                wx.reLaunch({ url: `dish?id=${this.data.id}` });
+            }
+        }
+    },
+    // 上传图片
+    uploadImgs: async function (imgs) {
+        if (imgs.length == 0) return [];
+        const imgRes = [];
+        for (const img of imgs) {
+            if (img.toString().indexOf("fanjiaming") == -1) {
+                const res = await awx.uploadFile({
+                    url: config.host + "/api/manager/dish/upload", 
+                    filePath: img,
+                    name: 'file',
+                })
+                var result = JSON.parse(res.data)
+                imgRes.push(result.data.info);
+            }
+            else {
+                imgRes.push(img);
+            }
+
+        }
+        return imgRes;
     },
     //类型
     onConfirm(event) {

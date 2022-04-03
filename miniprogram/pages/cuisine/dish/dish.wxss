@@ -158,10 +158,6 @@ Page {
     padding: 0;
 }
 
-.typePicker{
-    
-}
-
 /* 保存 */
 .save {
     text-align: center;

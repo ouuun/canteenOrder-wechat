@@ -7,7 +7,7 @@
                 <view class="delete" data-type="img" bindtap="delete" data-index="{{index}}">
                     <image src="../../../images/cuisine/delete.png" />
                 </view>
-                <image data-index="{{index}}" data-type="img" bindtap="look" src="{{item.url}}" />
+                <image data-index="{{index}}" data-type="img" bindtap="look" src="{{item}}" />
             </view>
         </block>
         <view wx:if="{{img.length<1}}" data-type="img" bindtap="chooseImg" class="input img">
@@ -25,7 +25,7 @@
                 <view class="delete" bindtap="delete" data-type="imgList" data-index="{{index}}">
                     <image src="../../../images/cuisine/delete.png" />
                 </view>
-                <image data-index="{{index}}" data-type="imgList" bindtap="look" src="{{item.url}}" />
+                <image data-index="{{index}}" data-type="imgList" bindtap="look" src="{{item}}" />
             </view>
         </block>
         <view wx:if="{{imgList.length<6}}" data-type="imgList" bindtap="chooseImg" class="input img">

@@ -134,7 +134,7 @@ page {
 /* tabbar */
 .down {
     background-color: white;
-    border: 1rpx red solid;
+    border-top: 5rpx #DCDCDC solid;
     flex-grow: 1;
     font-size: 30rpx;
     padding: 0 30rpx;
@@ -282,12 +282,11 @@ page {
 }
 
 /* 购物车弹窗 */
-.cart.all scroll-view{
-    
-}
+.cart.all scroll-view {}
+
 .cart.all .cart {
     padding: 20rpx;
-    background:rgba(116,120,122, 0.161);
+    background: rgba(116, 120, 122, 0.161);
 }
 
 .cart.all .top {
@@ -315,6 +314,7 @@ page {
     padding: 30rpx;
     border-radius: 25rpx;
     background-color: white;
+    margin-right: 20rpx;
 }
 
 .cart.all .middle .item .img image {
@@ -349,12 +349,12 @@ page {
     justify-content: space-between;
 }
 
-.cart.all .middle .item .right .priceAndNum .price{
+.cart.all .middle .item .right .priceAndNum .price {
     font-size: 45rpx;
     color: rgb(226, 67, 46);
 }
 
-.cart.all .middle .item .right .priceAndNum .price span{
+.cart.all .middle .item .right .priceAndNum .price span {
     font-size: 25rpx;
 }
 
@@ -365,4 +365,15 @@ page {
 .cart.all .minus {
     color: #1E90FF;
     border-color: #1E90FF;
+}
+
+.van-swipe-cell__right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10rpx;
+    color: white;
+    background-color: red;
+    border-radius: 25rpx;
+    /* width: 100%; */
 }

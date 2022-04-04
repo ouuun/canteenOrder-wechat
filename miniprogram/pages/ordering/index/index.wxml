@@ -32,12 +32,13 @@
                         </view>
                         <!-- 按键 -->
                         <view class="right">
-                            <view data-id="{{item.id}}" bindtap="showPopUp">
+                            <view wx:if="{{item.num==0}}" data-id="{{item.id}}" bindtap="showPopUp">
                                 <van-button type="primary">选规格</van-button>
                             </view>
-                            <!-- <view>
-                                <van-stepper button-size="25px" theme="round" value="{{ 1 }}" bind:change="changeNum" integer plus-class="plus" minus-class="minus"/>
-                            </view> -->
+                            <view wx:else>
+                                <van-stepper min="0" data-id="{{item.id}}"
+                                disable-input async-change="true" button-size="25px" theme="round" value="{{ item.num }}" bind:change="changeNum" integer plus-class="plus" minus-class="minus" />
+                            </view>
                         </view>
                     </view>
                 </block>
@@ -152,29 +153,33 @@
                 <view class="middle">
                     <block wx:for="{{shoppingCart}}" wx:key="index">
 
-                        <!-- <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 65 }}">
-                            <view slot="left">选择</view>
+                        <van-swipe-cell right-width="{{ 65 }}" async-close bind:close="onDelete" data-index="{{index}}">
                             <van-cell-group>
-                                <van-cell title="单元格" value="内容" />
-                            </van-cell-group>
-                            <view slot="right">删除</view>
-                        </van-swipe-cell> -->
 
-                        <view class="item">
-                            <view class="img">
-                                <image src="{{item.image}}"></image>
-                            </view>
-                            <view class="right">
-                                <view class="name">{{item.name}}</view>
-                                <view class="select">{{item.select}}</view>
-                                <view class="priceAndNum">
-                                    <view class="price"><span>￥</span>{{item.num*item.price}}</view>
-                                    <view class="num">
-                                        <van-stepper button-size="32px" theme="round" value="{{ item.num }}" data-index="{{index}}" bind:minus="deleteCartItem" bind:change="changeCartNum" integer plus-class="plus" minus-class="minus" />
+                                <view class="item">
+                                    <view class="img">
+                                        <image src="{{item.image}}"></image>
+                                    </view>
+                                    <view class="right">
+                                        <view class="name">{{item.name}}</view>
+                                        <view class="select">{{item.select}}</view>
+                                        <view class="priceAndNum">
+                                            <view class="price"><span>￥</span>{{item.num*item.price}}</view>
+                                            <view class="num">
+                                                <van-stepper button-size="32px" theme="round" value="{{ item.num }}" data-index="{{index}}" bind:minus="deleteCartItem" bind:change="changeCartNum" integer plus-class="plus" minus-class="minus" />
+                                            </view>
+                                        </view>
                                     </view>
                                 </view>
+
+                            </van-cell-group>
+
+                            <view slot="right" class="van-swipe-cell__right">
+                                删除
                             </view>
-                        </view>
+                        </van-swipe-cell>
+
+
                     </block>
                 </view>
             </scroll-view>

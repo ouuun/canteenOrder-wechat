@@ -18,7 +18,7 @@ Page({
         selectedNum: 1,//选择的数量
         selectPopup: false,//选规格弹窗
         cart: 0,//购物车中物品数量
-        cartPopup: true, //购物车弹窗
+        cartPopup: false, //购物车弹窗
     },
 
     /**
@@ -27,10 +27,10 @@ Page({
     onLoad: async function (options) {
         await this.getTypeList();
         await this.getDishList();
-        await this.setShowDishes();
         await this.updateCartNum();
         await this.addSumToDishes();
         await this.updateCartList();
+        await this.setShowDishes();
     },
     // 获取所有类型
     getTypeList: async function () {
@@ -80,7 +80,10 @@ Page({
     showPopUp: function (event) {
         const id = event.currentTarget.dataset.id;
         const dish = this.data.dishes.find(i => i.id == id);
-        const price = Number(dish.prices[0].price) + Number(dish.tastes[0].price);
+        var price = Number(dish.prices[0].price);
+        if (dish.tastes.length > 0) {
+            price += Number(dish.tastes[0].price);
+        }
         dish.price = price;
         this.setData({
             selectPopup: true,
@@ -168,6 +171,7 @@ Page({
                 this.updateCartNum();
                 this.clearSelected();
                 this.updateCartList();
+                this.onLoad();
                 return;
             }
         }
@@ -188,6 +192,7 @@ Page({
         this.updateCartNum();
         this.clearSelected();
         this.updateCartList();
+        this.onLoad();
     },
     // 清空已选择菜品相关变量
     clearSelected: async function () {
@@ -213,7 +218,7 @@ Page({
     //更新dishes中被加入购物车的数量
     updateDishes: function (id, num) {
         const dishes = this.data.dishes;
-        const index = dishes.findIndex(i => { return i.id = id });
+        const index = dishes.findIndex(i => { return i.id == id });
         if (!dishes[index].num) dishes[index].num = num;
         else { dishes[index].num += num; }
 
@@ -258,8 +263,9 @@ Page({
         shoppingCart[index].num = value;
         this.setData({
             shoppingCart: shoppingCart
-        })
-        wx.setStorageSync('cart', shoppingCart)
+        });
+        wx.setStorageSync('cart', shoppingCart);
+        this.onLoad();
     },
     //删除购物车中的选项
     clearAll: function () {
@@ -268,5 +274,59 @@ Page({
             cartPopup: false
         });
         wx.setStorageSync('cart', []);
+        this.onLoad();
+        this.updateCartNum();
+    },
+    //删除
+    onDelete: function (event) {
+        const { instance } = event.detail;
+        const { index } = event.currentTarget.dataset;
+        const { shoppingCart } = this.data;
+        let that = this;
+        wx.showModal({
+            title: '提示',
+            content: '确定要删除该菜品吗',
+            success(res) {
+                if (res.confirm) {
+                    instance.close();
+                    shoppingCart.splice(index, 1);
+                    that.setData({
+                        shoppingCart: shoppingCart
+                    });
+                    wx.setStorageSync('cart', shoppingCart);
+                    that.updateCartNum();
+                    this.onLoad();
+                }
+            }
+        })
+    },
+    //页面点击
+    changeNum: function (event) {
+        const value = event.detail;
+        const id = event.currentTarget.dataset.id;
+        const { dishes } = this.data;
+        const num = dishes.find(i => i.id == id).num;
+
+        if (value < num) {
+            this.showCart();
+            wx.showToast({
+                title: '请在购物车中调整数量',
+                icon: 'none'
+            })
+        } else {
+            const dish = this.data.dishes.find(i => i.id == id);
+            var price = Number(dish.prices[0].price);
+            if (dish.tastes.length > 0) {
+                price += Number(dish.tastes[0].price);
+            }
+
+            dish.price = price;
+            this.setData({
+                selectPopup: true,
+                selectedDish: dish
+            });
+        }
+
+
     }
 })

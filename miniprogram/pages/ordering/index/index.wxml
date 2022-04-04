@@ -1,0 +1,185 @@
+<!--pages/ordering/index/index.wxml-->
+<view class="body">
+    <view class="up">
+        <view class="left">
+            <scroll-view style="height: 89vh;" scroll-y>
+                <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
+                    <block wx:for="{{typeList}}" wx:key="index">
+                        <van-sidebar-item custom-class="title" title="{{item.name}}" />
+                    </block>
+                </van-sidebar>
+            </scroll-view>
+        </view>
+        <view class="right">
+            <scroll-view style="height: 89vh;" scroll-y>
+                <block wx:for="{{showDishes}}" wx:key="index">
+                    <view class="dish">
+                        <!-- 图片 -->
+                        <view class="left">
+                            <view class="img" data-id="{{item.id}}" bindtap=watchImgs">
+                                <image src="{{item.mainImages}}"></image>
+                            </view>
+                        </view>
+                        <!-- 信息 -->
+                        <view class="middle">
+                            <view class="name">{{item.name}}</view>
+                            <view class="sale">已售：{{item.sale || 0}}</view>
+                            <view class="material">食材：{{item.material}}</view>
+                            <view class="cooking">烹饪方式：{{item.cooking}}</view>
+                            <view class="price">
+                                <span class="icon">￥</span>{{item.prices[0].price}}
+                            </view>
+                        </view>
+                        <!-- 按键 -->
+                        <view class="right">
+                            <view data-id="{{item.id}}" bindtap="showPopUp">
+                                <van-button type="primary">选规格</van-button>
+                            </view>
+                            <!-- <view>
+                                <van-stepper button-size="25px" theme="round" value="{{ 1 }}" bind:change="changeNum" integer plus-class="plus" minus-class="minus"/>
+                            </view> -->
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </view>
+
+    <!-- tab bar -->
+    <view class="down">
+        <view class="tabbar">
+            <view class="buttons">
+                <view class="cart botton">
+                    <view class="icon">
+                        <van-icon bindtap="showCart" name="shopping-cart-o" color="black" size="26px" info="{{cart==0?'':cart}}" />
+                    </view>
+                    <view class="text">购物车</view>
+                </view>
+                <view class="order botton">
+                    <view class="icon">
+                        <van-icon name="orders-o" color="black" size="26px" />
+                    </view>
+                    <view class="text">订单</view>
+                </view>
+                <view class="manager botton">
+                    <view class="icon">
+                        <van-icon name="manager-o" color="black" size="26px" />
+                    </view>
+                    <view class="text">管理</view>
+                </view>
+            </view>
+            <view class="pay">
+                <!-- <van-button color="linear-gradient(to right, #B22222,#FF4500)"> -->
+                <van-button color="rgb(0,181,252)">
+                    提交订单
+                </van-button>
+            </view>
+        </view>
+    </view>
+</view>
+
+<!-- 选规格弹窗 -->
+<van-popup show="{{ selectPopup }}" round closeable position="bottom" bind:close="onClose">
+    <view class="popup">
+        <!-- 第一栏 -->
+        <view class="top">
+            <view class="left">
+                <image src="{{selectedDish.mainImages}}"></image>
+            </view>
+            <view class="right">
+                <view class="name">{{selectedDish.name}}</view>
+                <view class="selected">
+                    已选：
+                    <span>{{selectedDish.prices[selectedPrice].name}}</span>
+                    <span wx:if="{{selectedDish.tastes.length>0}}"> + {{selectedDish.tastes[selectedTaste].name}}</span>
+                </view>
+                <view class="weight">{{selectedDish.weight}}人份</view>
+                <view class="price"><span>￥</span>{{selectedDish.price || 0}}</view>
+            </view>
+        </view>
+
+        <!-- 第二栏 -->
+        <view class="middle">
+            <view class="num">数量</view>
+            <view class="numSelect">
+                <van-stepper value="{{ selectedNum }}" bind:change="change" />
+            </view>
+        </view>
+
+        <!-- 第三栏 -->
+        <view class="buttom">
+            <view class="item">
+                <view class="title">规格</view>
+                <view class="detail">
+                    <block wx:for="{{selectedDish.prices}}" wx:key="index">
+                        <view data-index="{{index}}" bindtap="selectPrice" class="item {{index==selectedPrice?'selected':''}}">{{item.name}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+
+        <!-- 第三栏 -->
+        <view class="buttom" wx:if="selectedDish.tastes.length>0">
+            <view class="item">
+                <view class="title">口味</view>
+                <view class="detail">
+                    <block wx:for="{{selectedDish.tastes}}" wx:key="index">
+                        <view data-index="{{index}}" bindtap="selectTaste" class="item {{index==selectedTaste?'selected':''}}">{{item.name}}</view>
+                    </block>
+                </view>
+            </view>
+        </view>
+
+        <!-- 加入购物车 -->
+        <view class="submit" bindtap="addToCart">
+            <button>加入购物车</button>
+        </view>
+    </view>
+</van-popup>
+
+
+<!-- 购物车弹窗 -->
+<van-popup show="{{ cartPopup }}" round position="bottom" bind:close="onClose">
+    <view class="cart all">
+        <view class="cart">
+            <view class="top">
+                <view class="title"> 已选商品 </view>
+                <view class="clearAll" bindtap="clearAll">
+                    <van-icon size="25px" name="delete-o" />清空
+                </view>
+            </view>
+            <scroll-view style="height: 50vh;" scroll-y scroll-top="200rpx">
+                <view class="middle">
+                    <block wx:for="{{shoppingCart}}" wx:key="index">
+
+                        <!-- <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 65 }}">
+                            <view slot="left">选择</view>
+                            <van-cell-group>
+                                <van-cell title="单元格" value="内容" />
+                            </van-cell-group>
+                            <view slot="right">删除</view>
+                        </van-swipe-cell> -->
+
+                        <view class="item">
+                            <view class="img">
+                                <image src="{{item.image}}"></image>
+                            </view>
+                            <view class="right">
+                                <view class="name">{{item.name}}</view>
+                                <view class="select">{{item.select}}</view>
+                                <view class="priceAndNum">
+                                    <view class="price"><span>￥</span>{{item.num*item.price}}</view>
+                                    <view class="num">
+                                        <van-stepper button-size="32px" theme="round" value="{{ item.num }}" data-index="{{index}}" bind:minus="deleteCartItem" bind:change="changeCartNum" integer plus-class="plus" minus-class="minus" />
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+
+
+    </view>
+</van-popup>

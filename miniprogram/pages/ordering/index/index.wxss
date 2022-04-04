@@ -1,0 +1,368 @@
+/* pages/ordering/index/index.wxss */
+page {
+    background: rgba(116, 120, 122, 0.161);
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.body .up {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.body .up .left {
+    background-color: white;
+}
+
+.body .up .left .title {
+    font-size: 32rpx;
+    padding-left: 35rpx;
+}
+
+.body .up>.right {
+    /* padding:15rpx; */
+    padding: 15rpx 0rpx 15rpx 15rpx;
+    flex-grow: 1;
+}
+
+/* 菜品 */
+
+.dish {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border-radius: 25rpx;
+    padding: 15rpx 15rpx 7rpx 15rpx;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
+    margin-right: 15rpx;
+    margin-bottom: 20rpx;
+}
+
+/* 图片 */
+
+.dish .left image {
+    width: 180rpx;
+    height: 170rpx;
+    border-radius: 25rpx;
+}
+
+/* 信息 */
+.dish .middle {
+    margin: 0 10rpx;
+    display: flex;
+    flex-direction: column;
+    font-size: 36rpx;
+    flex-grow: 1;
+    width: 190rpx;
+    overflow: hidden;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.dish .middle .sale {
+    font-size: 20rpx;
+    color: #999;
+}
+
+.dish .middle .material {
+    font-size: 20rpx;
+    color: #999;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dish .middle .cooking {
+    font-size: 20rpx;
+    color: #999;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dish .middle .price {
+    color: red;
+}
+
+.dish .middle .price .icon {
+    font-size: 26rpx;
+}
+
+/* 按钮 */
+.dish .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.dish .right button {
+    border-radius: 25rpx;
+    width: 115rpx;
+    height: 45rpx;
+    line-height: 45rpx;
+    font-size: 18rpx;
+    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
+    position: relative;
+    top: -7rpx;
+    background-color: rgb(1, 182, 253);
+    border: none;
+}
+
+.dish .right .plus {
+    background: #1E90FF;
+}
+
+.dish .right .minus {
+    color: #1E90FF;
+    border-color: #1E90FF;
+}
+
+.van-stepper__minus--disabled {
+    background-color: black;
+}
+
+/* tabbar */
+.down {
+    background-color: white;
+    border: 1rpx red solid;
+    flex-grow: 1;
+    font-size: 30rpx;
+    padding: 0 30rpx;
+}
+
+.body .down .tabbar {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabbar .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-grow: 1;
+    /* align-items:stretch; */
+}
+
+.tabbar .botton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20rpx;
+}
+
+.tabbar .pay {
+    flex-grow: 2;
+    margin-left: 25rpx;
+}
+
+.tabbar .pay button {
+    width: 100%;
+    border-radius: 50rpx;
+}
+
+/* 选规格弹窗 */
+.popup {
+    display: flex;
+    flex-direction: column;
+    padding: 30rpx;
+}
+
+.popup .top {
+    display: flex;
+    flex-direction: row;
+}
+
+.popup .top .left image {
+    width: 205rpx;
+    height: 205rpx;
+    border-radius: 25rpx;
+}
+
+.popup .top .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20rpx;
+}
+
+.popup .top .right .name {
+    font-size: 50rpx;
+}
+
+.popup .top .right .selected {
+    font-size: 30rpx;
+    color: #999999;
+}
+
+.popup .top .right .weight {
+    font-size: 30rpx;
+    color: #999999;
+}
+
+.popup .top .right .price {
+    font-size: 50rpx;
+    color: rgb(231, 0, 18);
+}
+
+.popup .top .right .price span {
+    font-size: 30rpx;
+}
+
+.popup .middle {
+    display: flex;
+    flex-direction: row;
+    font-size: 30rpx;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10rpx;
+}
+
+.popup .buttom {
+    margin-top: 10rpx;
+}
+
+.popup .buttom .item {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup .buttom .item .title {
+    font-size: 30rpx;
+}
+
+.popup .buttom .item .detail {
+    margin-top: 10rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.popup .buttom .item .detail .item {
+    padding: 20rpx 80rpx;
+    border-radius: 15rpx;
+    font-size: 30rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(248, 248, 248);
+    margin: 10rpx 7rpx;
+}
+
+.popup .buttom .item .detail .item.selected {
+    background-color: rgb(253, 235, 235);
+    color: rgb(234, 5, 20);
+    border: 1rpx solid rgb(224, 2, 19);
+}
+
+.popup .submit {
+    margin-top: 20rpx;
+}
+
+.popup .submit button {
+    background-color: rgb(231, 0, 18);
+    color: white;
+    border-radius: 25rpx;
+    font-size: 32rpx;
+}
+
+/* 购物车弹窗 */
+.cart.all scroll-view{
+    
+}
+.cart.all .cart {
+    padding: 20rpx;
+    background:rgba(116,120,122, 0.161);
+}
+
+.cart.all .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart.all .top .title {
+    font-size: 36rpx;
+}
+
+.cart.all .top .clearAll {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(155, 155, 155)
+}
+
+.cart.all .middle .item {
+    display: flex;
+    flex-direction: row;
+    margin: 15rpx 0;
+    padding: 30rpx;
+    border-radius: 25rpx;
+    background-color: white;
+}
+
+.cart.all .middle .item .img image {
+    width: 175rpx;
+    height: 175rpx;
+    border-radius: 25rpx;
+}
+
+.cart.all .middle .item .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 30rpx;
+    flex-grow: 1;
+}
+
+.cart.all .middle .item .right .name {
+    font-size: 40rpx;
+}
+
+.cart.all .middle .item .right .select {
+    color: rgb(153, 153, 153);
+    font-size: 25rpx;
+    /* position: relative; */
+    /* top:-rpx; */
+}
+
+
+.cart.all .middle .item .right .priceAndNum {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.cart.all .middle .item .right .priceAndNum .price{
+    font-size: 45rpx;
+    color: rgb(226, 67, 46);
+}
+
+.cart.all .middle .item .right .priceAndNum .price span{
+    font-size: 25rpx;
+}
+
+.cart.all .plus {
+    background: #1E90FF;
+}
+
+.cart.all .minus {
+    color: #1E90FF;
+    border-color: #1E90FF;
+}

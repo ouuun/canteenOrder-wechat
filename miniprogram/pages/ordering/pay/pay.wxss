@@ -1,0 +1,80 @@
+page {
+    background: rgba(116, 120, 122, 0.161);
+}
+
+.head {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20rpx;
+    margin: 30rpx;
+    border-radius: 25rpx;
+}
+
+.head .tips {
+    margin-bottom: 30rpx;
+}
+
+.time {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+    /* align-items: stretch; */
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.date>view {
+    margin: 0 10rpx;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #87CEFA;
+    width: 100rpx;
+    height: 100rpx;
+    color: #fff;
+    /* color: black; */
+    font-size: 36rpx;
+    border-radius: 25rpx;
+}
+
+.price{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 64rpx;
+    color: red;
+    margin:20rpx 0;
+}
+.price .rmb{
+    font-size: 40rpx;
+    position: relative;
+    left: 10rpx;
+    top: -5rpx;
+}
+
+.price .yuan{
+    font-size: 32rpx;
+    color: black;
+    margin-left: 10rpx;
+}
+/* 支付 */
+.pay{
+    margin: 30rpx; 
+}
+
+.pay button{
+    width: 100%;
+    font-size: 36rpx;
+    border-radius: 25rpx;
+}

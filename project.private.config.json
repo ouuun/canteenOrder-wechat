@@ -21,8 +21,15 @@
                 },
                 {
                     "name": "",
-                    "pathName": "pages/index/index",
+                    "pathName": "pages/ordering/confirm/confirm",
                     "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/ordering/pay/pay",
+                    "query": "id=1",
                     "scene": null,
                     "launchMode": "default"
                 }

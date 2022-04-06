@@ -1,8 +1,10 @@
-<!--pages/ordering/index/index.wxml-->
 <view class="body">
+    <view class="table" wx:if="{{table>0}}">
+        <van-notice-bar left-icon="volume-o" text="您当前所在的餐桌为{{table}}号桌" />
+    </view>
     <view class="up">
         <view class="left">
-            <scroll-view style="height: 89vh;" scroll-y>
+            <scroll-view style="height: {{table>0?'84':'89'}}vh;" scroll-y>
                 <van-sidebar active-key="{{ activeKey }}" bind:change="onChange">
                     <block wx:for="{{typeList}}" wx:key="index">
                         <van-sidebar-item custom-class="title" title="{{item.name}}" />
@@ -11,7 +13,7 @@
             </scroll-view>
         </view>
         <view class="right">
-            <scroll-view style="height: 89vh;" scroll-y>
+            <scroll-view style="height: {{table>0?'84':'89'}}vh;" scroll-y>
                 <block wx:for="{{showDishes}}" wx:key="index">
                     <view class="dish">
                         <!-- 图片 -->
@@ -36,8 +38,7 @@
                                 <van-button type="primary">选规格</van-button>
                             </view>
                             <view wx:else>
-                                <van-stepper min="0" data-id="{{item.id}}"
-                                disable-input async-change="true" button-size="25px" theme="round" value="{{ item.num }}" bind:change="changeNum" integer plus-class="plus" minus-class="minus" />
+                                <van-stepper min="0" data-id="{{item.id}}" disable-input async-change="true" button-size="25px" theme="round" value="{{ item.num }}" bind:change="changeNum" integer plus-class="plus" minus-class="minus" />
                             </view>
                         </view>
                     </view>
@@ -69,10 +70,10 @@
                     <view class="text">管理</view>
                 </view>
             </view>
-            <view class="pay">
+            <view class="pay" bindtap="toSettlement">
                 <!-- <van-button color="linear-gradient(to right, #B22222,#FF4500)"> -->
                 <van-button color="rgb(0,181,252)">
-                    提交订单
+                    去结算
                 </van-button>
             </view>
         </view>

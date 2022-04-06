@@ -61,5 +61,14 @@ module.exports = {
                 wx.navigateBack()
             }
         })
+    },
+    queryParse: function (query) {
+        var map = query.split("&");
+        var object = {};
+        map.forEach(i => {
+            var keyValue = i.split("=");
+            object[keyValue[0]] = keyValue[1];
+        })
+        return object;
     }
 }

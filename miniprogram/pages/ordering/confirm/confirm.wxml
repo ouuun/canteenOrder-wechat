@@ -1,0 +1,43 @@
+<!-- 订单 -->
+<view class="cart">
+    <scroll-view scroll-y style="height: 80vh;">
+        <block wx:for="{{cart}}" wx:key="index">
+            <view class="item">
+                <view class="left">
+                    <image src="{{item.image}}"></image>
+                </view>
+
+                <view class="middle">
+                    <view class="name">{{item.name}}</view>
+                    <view class="select">{{item.select}}</view>
+                    <view class="num">×{{item.num}}</view>
+                </view>
+
+                <view class="right"><span>￥</span>{{item.price}}</view>
+            </view>
+
+        </block>
+    </scroll-view>
+</view>
+
+<view style="display: flex; flex-direction: column; flex-grow:1;">
+
+    <view class="remark">
+        <van-cell-group>
+            <van-field label="备注" model:value="{{ remark }}" placeholder="请输入备注" border="{{ false }}" />
+        </van-cell-group>
+    </view>
+
+    <view class="all">
+        <view class="buttom">
+            <view class="left">
+                <span class="sum">合计:</span><span>￥</span>{{totalAmount}}
+            </view>
+            <view class="right" bindtap="createOrder">
+                <van-button round  type="primary">提交订单</van-button>
+            </view>
+        </view>
+    </view>
+
+
+</view>

@@ -4,7 +4,9 @@
         "pages/cuisine/type/type",
         "pages/cuisine/dish/dish",
         "pages/cuisine/show/show",
-        "pages/ordering/index/index"
+        "pages/ordering/index/index",
+        "pages/ordering/confirm/confirm",
+        "pages/ordering/pay/pay"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",
@@ -27,6 +29,8 @@
         "van-switch": "@vant/weapp/switch/index",
         "van-sidebar": "@vant/weapp/sidebar/index",
         "van-sidebar-item": "@vant/weapp/sidebar-item/index",
-        "van-swipe-cell": "@vant/weapp/swipe-cell/index"
+        "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+        "van-notice-bar": "@vant/weapp/notice-bar/index",
+        "van-count-down": "@vant/weapp/count-down/index"
     }
 }

@@ -1,0 +1,26 @@
+<view class="head">
+    <view class="tips">请在以下时间内支付：</view>
+    <view class="time">
+        <van-count-down use-slot time="{{ time }}" bind:change="onChange">
+            <view class="date">
+                <view class="item">{{ timeData.hours }}</view>
+                <view>:</view>
+                <view class="item">{{ timeData.minutes }}</view>
+                <view>:</view>
+                <view class="item">{{ timeData.seconds }}</view>
+            </view>
+        </van-count-down>
+    </view>
+
+
+    <view class="price">
+        <view class="rmb">￥</view>
+        <view>{{60}}</view>
+        <view class="yuan">元</view>
+    </view>
+</view>
+
+
+<view class="pay">
+    <van-button type="primary">支付</van-button>
+</view>

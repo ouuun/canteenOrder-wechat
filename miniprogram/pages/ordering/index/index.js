@@ -1,5 +1,5 @@
 // pages/ordering/index/index.js
-const { request } = require('../../../util/http/request')
+const { request, queryParse } = require('../../../util/http/request')
 
 Page({
 
@@ -19,12 +19,25 @@ Page({
         selectPopup: false,//选规格弹窗
         cart: 0,//购物车中物品数量
         cartPopup: false, //购物车弹窗
+        table: 0,
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: async function (options) {
+
+        if (options?.scene) {
+            const scene = decodeURIComponent(options.scene);
+            if (scene) {
+                const data = queryParse(scene);
+                this.setData({
+                    table: data.tableId
+                })
+            }
+        }
+
+
         await this.getTypeList();
         await this.getDishList();
         await this.updateCartNum();
@@ -184,7 +197,7 @@ Page({
         dish.select = selected.prices[priceIndex].name + (selected.tastes.length > 0 ? " + " + selected.tastes[tasteIndex].name : "");
         dish.num = num;
         dish.priceIndex = priceIndex;
-        dish.tasteIndex = tasteIndex;
+        dish.tasteIndex = selected.tastes.length > 0 ? tasteIndex : -1;
 
         cart.push(dish);
         wx.setStorageSync('cart', cart);
@@ -326,7 +339,12 @@ Page({
                 selectedDish: dish
             });
         }
-
-
+    },
+    //结算
+    toSettlement:function(){
+        const { table } = this.data;
+        wx.navigateTo({
+          url: `../confirm/confirm?table=${table}`,
+        })
     }
 })

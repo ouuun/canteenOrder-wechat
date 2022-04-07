@@ -17,6 +17,7 @@ page {
     border-radius: 25rpx;
     padding: 15rpx;
     box-shadow: 0.1rem 0.15rem 0.15rem #888888;
+    margin: 10rpx 0;
 }
 
 /* 图片 */

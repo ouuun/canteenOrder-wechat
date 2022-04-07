@@ -1,6 +1,6 @@
 <view class="body">
-    <view class="table" wx:if="{{table>0}}">
-        <van-notice-bar left-icon="volume-o" text="您当前所在的餐桌为{{table}}号桌" />
+    <view class="table" wx:if="{{table!=''}}">
+        <van-notice-bar left-icon="volume-o" text="您当前所在的餐桌为{{table}}" />
     </view>
     <view class="up">
         <view class="left">
@@ -57,13 +57,13 @@
                     </view>
                     <view class="text">购物车</view>
                 </view>
-                <view class="order botton">
+                <view class="order botton" bindtap="orders">
                     <view class="icon">
                         <van-icon name="orders-o" color="black" size="26px" />
                     </view>
                     <view class="text">订单</view>
                 </view>
-                <view class="manager botton">
+                <view class="manager botton" bindtap="toManager">
                     <view class="icon">
                         <van-icon name="manager-o" color="black" size="26px" />
                     </view>

@@ -1,6 +1,6 @@
 // pages/ordering/index/index.js
 const { request, queryParse } = require('../../../util/http/request')
-
+const { needLogin } = require('../../../util/http/login')
 Page({
 
     /**
@@ -19,7 +19,8 @@ Page({
         selectPopup: false,//选规格弹窗
         cart: 0,//购物车中物品数量
         cartPopup: false, //购物车弹窗
-        table: 0,
+        table: "",
+        tableId: 0,
     },
 
     /**
@@ -32,11 +33,13 @@ Page({
             if (scene) {
                 const data = queryParse(scene);
                 this.setData({
-                    table: data.tableId
+                    table: await this.getTableNameById(data.tableId),
+                    tableId: data.tableId
                 })
             }
         }
 
+        await needLogin();
 
         await this.getTypeList();
         await this.getDishList();
@@ -341,10 +344,33 @@ Page({
         }
     },
     //结算
-    toSettlement:function(){
-        const { table } = this.data;
+    toSettlement: function () {
+        const { tableId } = this.data;
         wx.navigateTo({
-          url: `../confirm/confirm?table=${table}`,
+            url: `../confirm/confirm?table=${tableId}`,
         })
+    },
+    //进入订单页
+    orders: function () {
+        wx.navigateTo({
+            url: `../order/order`,
+        })
+    },
+    //进入管理页
+    toManager: function () {
+        wx.navigateTo({
+            url: `../../index/index`,
+        })
+    },
+    //根据id获取餐桌名
+    getTableNameById: async function (id) {
+        const res = await request({
+            url: "/api/manager/table/getName",
+            method: "GET",
+            data: {
+                id: id
+            }
+        });
+        return res.data.info.name;
     }
 })

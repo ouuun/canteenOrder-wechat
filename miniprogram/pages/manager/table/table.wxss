@@ -1,0 +1,27 @@
+page{
+    background:rgba(116,120,122, 0.161);
+}
+/* 输入框 */
+.input{
+    font-size: 45rpx;
+    padding: 25rpx;
+}
+.input button{
+    font-size: 26rpx;
+}
+/* 图片 */
+.img{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.img image{
+    width: 500rpx;
+    height: 490rpx;
+}
+
+.img view{
+    font-size: 36rpx;
+    margin:20rpx;
+}

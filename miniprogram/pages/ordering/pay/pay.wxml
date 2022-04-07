@@ -21,6 +21,6 @@
 </view>
 
 
-<view class="pay">
+<view class="pay" bindtap="pay">
     <van-button type="primary">支付</van-button>
 </view>

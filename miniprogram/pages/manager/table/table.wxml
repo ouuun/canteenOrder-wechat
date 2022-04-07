@@ -1,0 +1,13 @@
+<view class="input">
+    <van-cell-group>
+        <van-field custom-style="input" model:value="{{ table }}" center clearable label="餐桌名" placeholder="请输入餐桌名" border="{{ false }}" use-button-slot>
+            <van-button slot="button" size="small" type="primary" bindtap="getQrCode">
+                生成
+            </van-button>
+        </van-field>
+    </van-cell-group>
+</view>
+<view class="img">
+    <image bindtap="look" src="{{qrCode}}"></image>
+    <view>请点击图片长按保存到手机</view>
+</view>

@@ -1,4 +1,5 @@
-const { request, needLogin } = require('../../../util/http/request')
+const { request } = require('../../../util/http/request')
+const { needLogin } = require('../../../util/http/login')
 let app = getApp()
 Page({
   data: {
@@ -172,8 +173,8 @@ Page({
     await this.getTypeList();
     wx.stopPullDownRefresh();
   },
-  getDishes:function(event){
+  getDishes: function (event) {
     const id = event.currentTarget.dataset.id;
-    wx.navigateTo({url:`../show/show?id=${id}`});
+    wx.navigateTo({ url: `../show/show?id=${id}` });
   }
 })

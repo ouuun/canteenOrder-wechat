@@ -1,0 +1,33 @@
+<view class="cart">
+    <block wx:for="{{order.Items}}" wx:key="index">
+        <view class="item">
+            <view class="left">
+                <image src="{{item.image}}"></image>
+            </view>
+
+            <view class="middle">
+                <view class="name">{{item.name}}</view>
+                <view class="select">{{item.price.name}} {{ item.taste ? '+'+item.taste.name:'' }}</view>
+                <view class="num">×{{item.quantity}}</view>
+            </view>
+            <view class="right"><span>￥</span>{{item.amount}}</view>
+        </view>
+    </block>
+</view>
+
+<view class="info">
+    <view class="item">
+        <view class="name">备注</view>
+        <view class="detail">{{order.remark.remark || '无'}}</view>
+    </view>
+
+    <view class="item">
+        <view class="name">支付方式</view>
+        <view class="detail">微信支付</view>
+    </view>
+
+    <view class="item">
+        <view class="name">下单时间</view>
+        <view class="detail">{{order.date}}</view>
+    </view>
+</view>

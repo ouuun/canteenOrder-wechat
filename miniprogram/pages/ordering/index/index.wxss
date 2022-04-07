@@ -38,7 +38,6 @@ page {
     background-color: white;
     border-radius: 25rpx;
     padding: 15rpx 15rpx 7rpx 15rpx;
-    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
     margin-right: 15rpx;
     margin-bottom: 20rpx;
 }
@@ -111,7 +110,6 @@ page {
     height: 45rpx;
     line-height: 45rpx;
     font-size: 18rpx;
-    box-shadow: 0.1rem 0.15rem 0.15rem #888888;
     position: relative;
     top: -7rpx;
     background-color: rgb(1, 182, 253);

@@ -1,0 +1,117 @@
+page {
+    background: rgba(116, 120, 122, 0.161);
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.body .tab {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+}
+
+.body .tab .item {
+    flex-grow: 1;
+    padding: 40rpx;
+    font-size: 36rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+.body .tab .splid {
+    width: 0;
+    height: 50rpx;
+    background-color: black;
+    border: 0.1rpx solid black;
+
+}
+
+.body .tab .item.selected {
+    color: #87CEFA;
+}
+
+.order {
+    display: flex;
+    flex-direction: column;
+    margin: 20rpx;
+    padding: 20rpx;
+    background-color: white;
+    border-radius: 25rpx;
+}
+
+.order .up {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.order .up .img {
+    width: 190rpx;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.order .up .img image {
+    border-radius: 15rpx;
+    margin-left: 15rpx;
+    width: 150rpx;
+    height: 150rpx;
+}
+
+.order .up>.name {
+    font-size: 36rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* font-weight: bolder; */
+}
+
+.order .up .name .selected {
+    font-size: 26rpx;
+    color: #A9A9A9;
+}
+
+.order .up .name .remark {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 1;
+    color: red;
+}
+
+.order .up .info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.order .up .info .price {
+    font-size: 40rpx;
+    color: red;
+}
+
+.order .up .info .price span {
+    font-size: 25rpx;
+    color: red;
+}
+
+.order .up .info .button button {
+    padding: 0;
+    width: 100rpx;
+    height: 50rpx;
+    border-radius: 25rpx;
+    margin-left: 10rpx;
+}
+
+.order .up .info .button {
+    display: flex;
+    flex-direction: row;
+}

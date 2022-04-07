@@ -1,0 +1,47 @@
+<view class="body">
+    <view class="tab">
+        <view bindtap="changeType" data-type="已支付" class="item {{type === '已支付' ?'selected':''}}">已支付</view>
+        <view class="splid"></view>
+        <view bindtap="changeType" data-type="未支付" class="item {{type === '未支付' ?'selected':''}}">未支付</view>
+        <view class="splid"></view>
+        <view bindtap="changeType" data-type="已取消" class="item {{type === '已取消' ?'selected':''}}">已取消</view>
+        <view class="splid"></view>
+        <view bindtap="changeType" data-type="全部" class="item {{type === '全部' ?'selected':''}}">全部</view>
+    </view>
+
+    <view class="orders">
+        <scroll-view scroll-y="true" style="height: 90vh;">
+            <block wx:for="{{showOrders}}" wx:key="index" wx:if="orders.Items.length>0">
+                <view class="order">
+                    <view class="up">
+                        <!-- 图片 -->
+                        <view class="img">
+                            <scroll-view style="width: 100%;" scroll-x="true">
+                                <block wx:for="{{item.Items}}" wx:key="index">
+                                    <image src="{{item.image}}"></image>
+                                </block>
+                            </scroll-view>
+                        </view>
+                        <!-- 名字 -->
+                        <view class="name" wx:if="{{item.Items.length==1}}">
+                            <view class="name">{{item.Items[0].name}}</view>
+                            <view class="selected">{{item.select}}</view>
+                            <view class="remark">{{item.remark.remark}}</view>
+                        </view>
+                        <!-- 信息 -->
+                        <view class="info">
+                            <view class="price"><span>￥</span>{{item.price}}</view>
+                            <view class="num">共{{item.Items.length || 1}}件</view>
+                            <view class="button">
+                                <van-button wx:if="{{item.state =='未支付'}}" data-id="{{item.id}}" bindtap="orderPay" type="primary">支付</van-button>
+                                <van-button data-id="{{item.id}}" bindtap="orderDetail" type="primary">查看</van-button>
+                            </view>
+                        </view>
+                    </view>
+
+
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+</view>

@@ -37,17 +37,17 @@
 <!-- 每日数据 -->
 <view class="data">
   <view class="item">
-    <view class="num">0</view>
+    <view class="num">{{orderNum}}</view>
     <view class="name">订单</view>
   </view>
   <view class="item-split"></view>
   <view class="item">
-    <view class="num">0</view>
+    <view class="num">{{amount}}</view>
     <view class="name">收入</view>
   </view>
   <view class="item-split"></view>
   <view class="item">
-    <view class="num">0</view>
+    <view class="num">{{dishNum}}</view>
     <view class="name">菜品</view>
   </view>
 </view>

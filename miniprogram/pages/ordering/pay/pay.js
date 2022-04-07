@@ -7,13 +7,14 @@ Page({
      */
     data: {
         time: 15 * 60 * 1000,
+        price: 0,
+        order: {}
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options);
         this.getOrderInfo(options.id);
     },
     //改变时间
@@ -33,15 +34,15 @@ Page({
         });
         if (res.code == "200") {
             const order = res.data.info;
-            // if(order.state == "未支付"){
-            if (order.state !== "未支付") {
-                var start = Date.parse(new Date(order.createdAt));//获得开始时间的毫秒数
-                var end = Date.parse(new Date());//获得结束时间的毫秒数
-                var time = end - start; //两个时间戳相差的毫秒数
+            if(order.state == "未支付"){
+            // if (true) {
+                const end = Date.parse(new Date(order.createdAt)) + 15 * 60 * 1000;//获得开始时间的毫秒数
+                const now = Date.parse(new Date());
 
                 this.setData({
-                    time:time,
-                    price:order.price
+                    time: end - now,
+                    price: order.price,
+                    order: order
                 })
             }
             else {
@@ -55,6 +56,29 @@ Page({
                     }
                 })
             }
+        }
+    },
+    //模拟支付
+    pay: async function () {
+        const res = await request({
+            url: "/api/order/pay",
+            method: "POST",
+            data: {
+                id: this.data.order.id
+            },
+            token: true
+        });
+
+        if (res.code == "200") {
+            wx.showToast({
+                title: '支付成功',
+                duration: 2000
+            });
+            setTimeout(() => {
+                wx.redirectTo({
+                    url: '../index/index',
+                })
+            }, 2000);
         }
     }
 })

@@ -1,4 +1,6 @@
 const config = require('../config/config')
+const { toAsync } = require('../toAsync/toAsync')
+const awx = toAsync("login", "getUserProfile");
 
 module.exports = {
     request: async function ({ url, method, data = {}, token }) {
@@ -62,6 +64,7 @@ module.exports = {
             }
         })
     },
+    //转换参数
     queryParse: function (query) {
         var map = query.split("&");
         var object = {};
@@ -70,5 +73,5 @@ module.exports = {
             object[keyValue[0]] = keyValue[1];
         })
         return object;
-    }
+    },
 }

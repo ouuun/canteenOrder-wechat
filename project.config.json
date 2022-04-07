@@ -47,7 +47,7 @@
     },
     "appid": "wx98a6766208b54ed3",
     "projectname": "canteenOrder",
-    "libVersion": "2.23.1",
+    "libVersion": "2.23.3",
     "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
     "condition": {
         "search": {

@@ -7,9 +7,13 @@ Page({
     hasInfo: false,
     headImage: '../../images/index/user.png',
     name: 'username',
-    openid: ''
+    openid: '',
+    orderNum: 0,
+    dishNum: 0,
+    amount: 0,
   },
   onLoad: async function () {
+    await this.getDayInfo();
     if (wx.getStorageSync('token')) {
       await this.getUserInfoByToken();
       this.setData({
@@ -103,12 +107,28 @@ Page({
       wx.setStorageSync('headImage', this.data.headImage);
     };
   },
-  subscribe:function(){
+  subscribe: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['Jh3c8z8H_SBimPbWdhuZYX3biCMvojLBLjXpCsz0jbw']
     });
+    wx.navigateTo({ url: "../ordering/order/order" });
   },
-  openCuisine:function() {
-    wx.navigateTo({url:"../cuisine/type/type"});
+  openCuisine: function () {
+    wx.navigateTo({ url: "../cuisine/type/type" });
+  },
+  //获取每日信息
+  getDayInfo: async function () {
+    const res = await request({
+      url: "/api/manager/report/day",
+      method: "GET"
+    });
+    if (res.code == "200") {
+      const data = res.data.info;
+      this.setData({
+        orderNum: data.orderNum,
+        dishNum: data.dishNum,
+        amount: data.amount
+      });
+    }
   }
 });

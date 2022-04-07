@@ -10,7 +10,6 @@ Page({
     data: {
         cart: [],
         totalAmount: 0,
-        table: 0,
     },
 
     /**
@@ -25,7 +24,7 @@ Page({
     loadCart: function () {
         const cart = wx.getStorageSync('cart');
         const amount = cart.reduce((prve, curr) => {
-            return prve += (curr.price * curr.num);
+            return prve += curr.price;
         }, 0);
         this.setData({
             cart: cart,
@@ -33,7 +32,7 @@ Page({
         });
     },
     createOrder: async function () {
-        const { cart, remark, table } = this.data;
+        const { cart, remark, tableId } = this.data;
         var data = {};
         const items = cart.map(item => {
             return {
@@ -48,8 +47,8 @@ Page({
 
         data.type = 'dish';
         data.items = items;
-        data.remark = remark;
-        data.table = table;
+        data.remark = { remark: remark };
+        data.table = tableId;
 
         const res = await request({
             url: "/api/order/create",
@@ -58,13 +57,12 @@ Page({
             token: true
         });
 
-        if(res.code == "200"){
+        if (res.code == "200") {
             wx.setStorageSync('cart', []);
             wx.redirectTo({
-              url: '../pay/pay.js',
+                url: `../pay/pay?id=${res.data.info.id}`,
             })
         }
 
     },
-
 })

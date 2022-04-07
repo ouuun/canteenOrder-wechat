@@ -16,8 +16,8 @@
                     "name": "",
                     "pathName": "pages/ordering/index/index",
                     "query": "",
-                    "launchMode": "default",
-                    "scene": null
+                    "scene": null,
+                    "launchMode": "default"
                 },
                 {
                     "name": "",
@@ -29,9 +29,37 @@
                 {
                     "name": "",
                     "pathName": "pages/ordering/pay/pay",
-                    "query": "id=1",
-                    "scene": null,
-                    "launchMode": "default"
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/ordering/order/order",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/ordering/detail/detail",
+                    "query": "id=6",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/manager/table/table",
+                    "query": "",
+                    "launchMode": "default",
+                    "scene": null
                 }
             ]
         }

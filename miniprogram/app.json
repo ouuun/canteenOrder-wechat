@@ -9,7 +9,8 @@
         "pages/ordering/pay/pay",
         "pages/ordering/order/order",
         "pages/ordering/detail/detail",
-        "pages/manager/table/table"
+        "pages/manager/table/table",
+        "pages/manager/report/report"
     ],
     "window": {
         "backgroundColor": "#F6F6F6",

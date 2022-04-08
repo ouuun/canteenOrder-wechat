@@ -16,8 +16,8 @@
                     "name": "",
                     "pathName": "pages/ordering/index/index",
                     "query": "",
-                    "scene": null,
-                    "launchMode": "default"
+                    "launchMode": "default",
+                    "scene": null
                 },
                 {
                     "name": "",
@@ -60,6 +60,13 @@
                     "query": "",
                     "launchMode": "default",
                     "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/manager/report/report",
+                    "query": "",
+                    "scene": null,
+                    "launchMode": "default"
                 }
             ]
         }

@@ -130,5 +130,11 @@ Page({
         amount: data.amount
       });
     }
-  }
+  },
+  toTable: function () {
+    wx.navigateTo({ url: "../manager/table/table" });
+  },
+  toReport: function () {
+    wx.navigateTo({ url: "../manager/report/report" });
+  },
 });

@@ -9,7 +9,7 @@ Page({
      */
     data: {
         table: "",
-        qrCode: "https://www.fanjiaming.top/images/qrCode/table_1.png"
+        qrCode: ""
     },
 
     /**

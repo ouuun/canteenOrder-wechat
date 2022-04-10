@@ -7,7 +7,7 @@
         </van-field>
     </van-cell-group>
 </view>
-<view class="img">
+<view class="img" wx:if="{{qrCode !=''}}">
     <image bindtap="look" src="{{qrCode}}"></image>
     <view>请点击图片长按保存到手机</view>
 </view>

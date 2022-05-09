@@ -20,7 +20,7 @@
         </view>
         <view class="type" bindtap="subscribe">
           <image src="../../images/index/order.png"></image>
-          <view class="name">我的订单</view>
+          <view class="name">订单管理</view>
         </view>
         <view class="type" bindtap="toTable">
           <image src="../../images/index/code.png"></image>

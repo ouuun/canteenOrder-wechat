@@ -114,4 +114,5 @@ page {
 
 .buttom .right button{
    background-color: rgb(0,181,252);
+   border-color: rgb(0,181,252);
 }

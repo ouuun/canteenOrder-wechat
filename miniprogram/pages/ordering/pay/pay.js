@@ -35,7 +35,6 @@ Page({
         if (res.code == "200") {
             const order = res.data.info;
             if(order.state == "未支付"){
-            // if (true) {
                 const end = Date.parse(new Date(order.createdAt)) + 15 * 60 * 1000;//获得开始时间的毫秒数
                 const now = Date.parse(new Date());
 

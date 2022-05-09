@@ -62,7 +62,6 @@ Page({
       var movetop = e.touches[0].pageY - this.data.itemheight;
       var moveoutindex = parseInt((movetop - this.data.jianqu) / this.data.jiange);
       if (e.currentTarget.dataset.index <= moveoutindex) moveoutindex++;
-      // this.moveoutindex = moveoutindex;
       this.setData({ nowmoveindex: e.currentTarget.dataset.index, movetop, moveoutindex });
       this.animate(`#movelist${e.currentTarget.dataset.index}`, [{ top: movetop + 'px' }], 0);
       this.setData({ isMove: true });
@@ -85,7 +84,6 @@ Page({
   //排序完成
   sort: async function () {
     if (this.data.sort) {
-      console.log('保存');
       const sorted = this.data.typeList.map(item => { return { id: item.id, sort: item.sort } });
       const res = await request({
         url: '/api/manager/type/sort',

@@ -69,6 +69,12 @@ Page({
                 active: true
             }
         });
+        var list = res.data.list;
+        list.forEach(dish => {
+            dish.sale = dish.prices.reduce((prev, curr) => {
+                return prev + curr.sale;
+            }, 0);
+        });
         if (res.code == "200") {
             this.setData({
                 dishes: res.data.list

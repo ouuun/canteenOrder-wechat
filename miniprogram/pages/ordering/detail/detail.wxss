@@ -64,6 +64,11 @@ page {
     color: rgb(255, 75, 52);
 }
 
+.cart .item .right span{
+   position: relative;
+   top: -2rpx;
+}
+
 /* 相关信息 */
 .info {
     display: flex;

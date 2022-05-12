@@ -13,6 +13,9 @@
         <scroll-view scroll-y="true" style="height: 90vh;">
             <block wx:for="{{showOrders}}" wx:key="index" wx:if="orders.Items.length>0">
                 <view class="order">
+                    <view class="top">
+                        <view class="table">{{item.Table.name}}</view>
+                    </view>
                     <view class="up">
                         <!-- 图片 -->
                         <view class="img">

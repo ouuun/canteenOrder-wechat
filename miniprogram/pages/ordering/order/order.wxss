@@ -51,6 +51,12 @@ page {
     justify-content: flex-start;
 }
 
+.order .top view{
+    padding-left: 15rpx;
+    margin-bottom: 15rpx;
+    font-size: 40rpx;
+}
+
 .order .up .img {
     width: 190rpx;
     white-space: nowrap;
@@ -92,6 +98,7 @@ page {
     align-items: flex-end;
     justify-content: space-between;
 }
+
 
 .order .up .info .price {
     font-size: 40rpx;

@@ -22,6 +22,16 @@
     </view>
 
     <view class="item">
+        <view class="name">餐桌</view>
+        <view class="detail">{{order.Table.name}}</view>
+    </view>
+
+    <view class="item">
+        <view class="name">状态</view>
+        <view class="detail">{{order.state}}</view>
+    </view>
+
+    <view class="item">
         <view class="name">支付方式</view>
         <view class="detail">微信支付</view>
     </view>

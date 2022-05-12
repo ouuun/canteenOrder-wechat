@@ -1,5 +1,4 @@
 {
   "usingComponents": {},
-  "enablePullDownRefresh":true,
   "navigationBarTitleText": "类型管理"
 }

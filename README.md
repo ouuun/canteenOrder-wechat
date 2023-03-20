@@ -1,12 +1,37 @@
-# 云开发 quickstart
+##示例图片
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+[image](https://api.fanjiaming.top/images/github/canteenOrder/1.jpg)
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
+[image](https://api.fanjiaming.top/images/github/canteenOrder/2.jpg)
 
-## 参考文档
+[image](https://api.fanjiaming.top/images/github/canteenOrder/3.jpg)
 
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
+[image](https://api.fanjiaming.top/images/github/canteenOrder/1.png)
 
+[image](https://api.fanjiaming.top/images/github/canteenOrder/2.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/3.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/4.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/5.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/6.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/7.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/8.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/9.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/10.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/11.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/12.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/13.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/14.png)
+
+[image](https://api.fanjiaming.top/images/github/canteenOrder/15.png)
